@@ -15,7 +15,7 @@ class ConnexionController extends AbstractController
     public function identification(AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->getUser()) {
-             return $this->redirectToRoute('connexion_identification');
+             return $this->redirectToRoute('sortie_liste');
         }
 
         // get the login error if there is one

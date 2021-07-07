@@ -6,19 +6,19 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>{% block titre %}Sortir{% endblock %}</title>
+    <title>{% block title %}Sortir{% endblock %}</title>
 
-    {# Import des fichiers CSS #}
-    <link rel="stylesheet" href="{{ asset('css/myStyle.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
 
     {# Changement du favicon et police à importer #}
 </head>
+
+<body>
     <header>
         {# en-tête à faire #}
+        {% include 'menu/nav.html.twig' %}
     </header>
-
-    {# menu de navigation à inclure #}
 
     <main>
         {% block body %}{% endblock %}
@@ -27,7 +27,5 @@
     <footer>
         {# pied-de-page à faire #}
     </footer>
-<body>
-
 </body>
 </html>

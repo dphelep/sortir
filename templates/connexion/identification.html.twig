@@ -9,7 +9,6 @@
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
 
-        <h1 class="h3 mb-3 font-weight-normal">Veuillez vous identifier</h1>
         <label for="inputEmail">Identifiant :</label>
         <input type="email" name="email" id="inputEmail" class="form-control" required autofocus>
         <br><br>
@@ -27,7 +26,7 @@
 
         <div class="checkbox mb-3">
             <label>
-                <input type="checkbox" name="_remember_me">Se souvenir de moi
+                <input type="checkbox" name="_remember_me"> Se souvenir de moi
             </label>
         </div>
         <br>

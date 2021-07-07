@@ -1,3 +1,19 @@
 #btnConnexion {
+    height: 30px;
+    width: 60px;
+}
 
+nav ul {
+    display: flex;
+    list-style: none;
+    padding-left: 0;
+}
+
+nav li {
+    margin-right: 1rem; /*pourcentage de taille en fonction du zoom 1 rem = 10px pour zoom = 100%*/
+}
+
+label {
+    display: block;
+    color: white;
 }

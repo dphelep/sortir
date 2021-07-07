@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SortieController extends AbstractController
 {
-    #[Route('/', name: 'sortie_list')]
+    #[Route('/', name: 'sortie_liste')]
     public function index(): Response
     {
         return $this->render('sortie/liste.html.twig', [
