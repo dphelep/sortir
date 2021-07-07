@@ -5,23 +5,32 @@ namespace App\DataFixtures;
 use App\Entity\Campus;
 use App\Entity\Etat;
 use App\Entity\Lieu;
-
+use App\Entity\Participant;
 use App\Entity\Ville;
+use App\Repository\CampusRepository;
 use App\Repository\VilleRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-
-use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+
 class AppFixtures extends Fixture
 {
-    private $attributVilleRepository;
 
-    public function __construct(VilleRepository $instanceVilleRepository)
+    private $attributVilleRepository;
+    private $atbCampusRepo;
+    private $passwordEncoder;
+
+    public function __construct(VilleRepository $instanceVilleRepository,
+                                CampusRepository $instCampusRepo,
+                                UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->attributVilleRepository = $instanceVilleRepository;
+        $this->atbCampusRepo = $instCampusRepo;
+        $this->passwordEncoder =$passwordEncoder;
     }
+
 
     //création de fausse données avec fzaninotto/faker
     public function load(ObjectManager $manager)
@@ -85,5 +94,35 @@ class AppFixtures extends Fixture
         }
 
         $manager->flush();
+
+        //participant
+
+        $instCampus = $this->atbCampusRepo->findAll();
+        $mail = ['davidp@eni.fr','davidh@eni.fr','laurad@eni.fr'];
+        $pseudos = ['davidp', 'davidh', 'laurad'];
+        $passwords = ['mdp','mdp','mdp'];
+
+
+        for ($i = 0; $i < count($pseudos); $i++) {
+            $participant = new Participant();
+            $participant->setPseudo($pseudos[$i])
+                ->setNom($generator->lastName)
+                ->setPrenom($generator->firstName)
+                ->setTelephone($generator->phoneNumber)
+                ->setMail($mail[$i])
+                ->setPassword($this->passwordEncoder->encodePassword(
+                    $participant,
+                    $passwords[$i]
+                ))
+                ->setRoles([])
+                ->setActif(true)
+                ->setCampus($generator->randomElement($instCampus));
+            $participants[] = $participant;
+            $manager->persist($participant);
+        }
+        $manager->flush();
+        //Sortie
+
+
     }
 }
