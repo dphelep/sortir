@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Participant;
 use App\Form\ProfilType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,11 +13,12 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class ProfilController extends AbstractController
 {
-    #[Route('/profil/modifier', name: 'profil_modifier')]
-    public function modifier(int $id,
-                             UserPasswordEncoderInterface $encoder,
+    /**
+     * @Route("/profil/modifier", name="profil_modifier")
+     */
+    public function modifier(Request $request,
                              EntityManagerInterface $entityManager,
-                             Request $request): Response {
+                             ): Response {
 
         $participant = $this->getUser();
         $profilForm = $this->createForm(ProfilType::class, $participant);
@@ -24,14 +26,12 @@ class ProfilController extends AbstractController
         $profilForm->handleRequest($request);
 
         if($profilForm->isSubmitted() && $profilForm->isValid()) {
-            $hashed = $encoder->encodePassword($participant, $participant->getPassword());
-            $participant->setPassword($hashed);
 
             $entityManager->persist($participant);
             $entityManager->flush();
 
             $this->addFlash('success', 'Profil modifié avec succès !');
-            return $this->redirectToRoute('accueil');
+            return $this->redirectToRoute('sortie_liste');
         }
 
         return $this->render('profil/monProfil.html.twig', [
