@@ -3,34 +3,35 @@
 namespace App\Controller;
 
 use App\Form\ProfilType;
-use App\Repository\ParticipantRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class ProfilController extends AbstractController
 {
-    #[Route('/profil/modifier/{id}', name: 'profil_modifier')]
+    #[Route('/profil/modifier', name: 'profil_modifier')]
     public function modifier(int $id,
-                             ParticipantRepository $participantRepository,
+                             UserPasswordEncoderInterface $encoder,
                              EntityManagerInterface $entityManager,
-                             Request $request) {
+                             Request $request): Response {
 
-        $participant = $participantRepository->find($id);
+        $participant = $this->getUser();
         $profilForm = $this->createForm(ProfilType::class, $participant);
 
         $profilForm->handleRequest($request);
 
         if($profilForm->isSubmitted() && $profilForm->isValid()) {
+            $hashed = $encoder->encodePassword($participant, $participant->getPassword());
+            $participant->setPassword($hashed);
+
             $entityManager->persist($participant);
             $entityManager->flush();
 
             $this->addFlash('success', 'Profil modifié avec succès !');
-            return $this->redirectToRoute('sortie_list', [
-                'id' => $participant->getId(),
-            ]);
+            return $this->redirectToRoute('accueil');
         }
 
         return $this->render('profil/monProfil.html.twig', [

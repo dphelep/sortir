@@ -8,6 +8,7 @@
     <h2>Mon Profil</h2>
     {{ form_start(profilForm) }}
     {{ form_widget(profilForm) }}
-    <button>Valider</button>
+    <button type="submit">Enregistrer</button>
+    <a href="{{ path('accueil') }}" <button>Annuler</button>
     {{ form_end() }}
 {% endblock %}
