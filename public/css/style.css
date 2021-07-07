@@ -1,6 +1,11 @@
+body {
+    font-family: 'Otomanopee One', sans-serif;
+}
+
+
+
 #btnConnexion {
-    height: 30px;
-    width: 60px;
+
 }
 
 nav ul {
@@ -11,9 +16,4 @@ nav ul {
 
 nav li {
     margin-right: 1rem; /*pourcentage de taille en fonction du zoom 1 rem = 10px pour zoom = 100%*/
-}
-
-label {
-    display: block;
-    color: white;
 }

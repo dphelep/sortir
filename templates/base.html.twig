@@ -10,13 +10,14 @@
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
-
-    {# Changement du favicon et police à importer #}
+    <link rel="icon" href="{{ asset('img/icon4.png') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Otomanopee+One&display=swap">
 </head>
 
 <body>
     <header>
         {# en-tête à faire #}
+        <h1><a href="{{ path('sortie_liste') }}"><img src="{{ asset('img/sortir.jpg') }}" alt="Sortir"></a></h1>
         {% include 'menu/nav.html.twig' %}
     </header>
 
@@ -25,7 +26,7 @@
     </main>
 
     <footer>
-        {# pied-de-page à faire #}
+        <div>&copy; Sortir {{ "now"|date('Y') }}</div>
     </footer>
 </body>
 </html>
