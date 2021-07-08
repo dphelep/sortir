@@ -3,7 +3,7 @@
 {% block title %} {{ parent()}} | Connexion {% endblock %}
 
 {% block body %}
-
+<div class="container">
     <form method="post">
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -33,5 +33,6 @@
 
         <button id="btnConnexion">Connexion</button>
     </form>
+</div>
 
 {% endblock %}
