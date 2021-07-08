@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\SortieRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -59,20 +61,25 @@ class Sortie
     private $siteOrganisateur;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Participant::class, inversedBy="sorties")
+     * @ORM\ManyToOne(targetEntity=Lieu::class, inversedBy="sorties")
+     */
+    private $lieu;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Participant::class, inversedBy="sortiesOganisees")
      * @ORM\JoinColumn(nullable=false)
      */
     private $organisateur;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Inscription::class)
+     * @ORM\ManyToMany(targetEntity=Participant::class, inversedBy="sortiesParticipees")
      */
-    private $listeParticipants;
+    private $participants;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Lieu::class, inversedBy="sorties")
-     */
-    private $lieu;
+    public function __construct()
+    {
+        $this->participants = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -175,6 +182,18 @@ class Sortie
         return $this;
     }
 
+    public function getLieu(): ?Lieu
+    {
+        return $this->lieu;
+    }
+
+    public function setLieu(?Lieu $lieu): self
+    {
+        $this->lieu = $lieu;
+
+        return $this;
+    }
+
     public function getOrganisateur(): ?Participant
     {
         return $this->organisateur;
@@ -187,27 +206,28 @@ class Sortie
         return $this;
     }
 
-    public function getListeParticipants(): ?Inscription
+    /**
+     * @return Collection|Participant[]
+     */
+    public function getParticipants(): Collection
     {
-        return $this->listeParticipants;
+        return $this->participants;
     }
 
-    public function setListeParticipants(?Inscription $listeParticipants): self
+    public function addParticipant(Participant $participant): self
     {
-        $this->listeParticipants = $listeParticipants;
+        if (!$this->participants->contains($participant)) {
+            $this->participants[] = $participant;
+        }
 
         return $this;
     }
 
-    public function getLieu(): ?Lieu
+    public function removeParticipant(Participant $participant): self
     {
-        return $this->lieu;
-    }
-
-    public function setLieu(?Lieu $lieu): self
-    {
-        $this->lieu = $lieu;
+        $this->participants->removeElement($participant);
 
         return $this;
     }
+
 }

@@ -16,11 +16,14 @@ body {
     text-align: center;
 }
 
+#menu {
+
+}
+
 nav ul {
     display: flex;
     list-style: none;
     padding-left: 0;
-    text-align: right;
 }
 
 nav li {
