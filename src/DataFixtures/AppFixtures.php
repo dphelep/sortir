@@ -156,7 +156,7 @@ class AppFixtures extends Fixture
         $instEtat = $this->atbEtatRepo->findAll();
         $instLieu = $this->atbLieuRepo->findAll();
         $instParticipants = $this->atbParticipantRepo->findAll();
-        $sortieNom = ['Sortie Booling', 'Sortie Ciné', 'Promenade en campagne', 'Allons au parc', 'Allons voir Mickey'];
+        $sortieNom = ['Sortie Bowling', 'Sortie Ciné', 'Promenade en campagne', 'Allons au parc', 'Allons voir Mickey'];
         $sortieInfo= ["Tu comprends, tu vois au passage qu'il n'y a rien de concret car là, j'ai un chien en ce moment à côté de moi et je le caresse, et ça, c'est très dur, et, et, et... c'est très facile en même temps. Mais ça, c'est uniquement lié au spirit. ",
             "Tu vois, je suis mon meilleur modèle car il faut se recréer... pour recréer... a better you et cela même si les gens ne le savent pas ! Donc on n'est jamais seul spirituellement ! ",
             "Même si on se ment, après il faut s'intégrer tout ça dans les environnements et en vérité, la vérité, il n'y a pas de vérité et cette officialité peut vraiment retarder ce qui devrait devenir... Et là, vraiment, j'essaie de tout coeur de donner la plus belle réponse de la terre ! "];

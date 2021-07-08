@@ -32,4 +32,20 @@ class SortieController extends AbstractController
     public function creer() {
 
     }
+
+    /**
+     * @Route("/detail/{id}", name="sortie_detail")
+     */
+
+    public function detail($id, SortieRepository $sortieRepository): Response
+    {
+        $sortie = $sortieRepository->find($id);
+        if (!$sortie) {
+            throw $this->createNotFoundException("Oops ! La sortie n'existe pas !");
+        }
+
+        return $this->render('sortie/detail.html.twig', [
+            'sortie' => $sortie
+        ]);
+    }
 }
