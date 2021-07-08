@@ -23,6 +23,7 @@ class ProfilType extends AbstractType
             ->add('telephone')
             ->add('mail', EmailType::class)
             ->add('motPasse', RepeatedType::class, [
+                'mapped' => false,
                 'type' => PasswordType::class,
                 'invalid_message' => 'Les deux mots de passe doivent correspondre.',
                 'required' => true,
@@ -31,7 +32,7 @@ class ProfilType extends AbstractType
             ])
             ->add('campus', EntityType::class, [
                 'class' => Campus::class,
-                'choice_label' => 'campus',
+                'choice_label' => 'nom',
             ]);
     }
 
