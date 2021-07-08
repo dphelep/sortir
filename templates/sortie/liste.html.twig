@@ -1,9 +1,48 @@
 {% extends 'base.html.twig' %}
 
 {% block titre %}
-    {{ parent() }} | Liste des sorties
+    {{ parent() }} | Accueil
 {% endblock %}
 
 {% block body %}
-    <h2>Liste des sorties</h2>
+    <div id="infos">
+        <h4>Date du jour : {{ "now"|date('d/m/Y') }}</h4>
+        <h4>Participant : {{ app.user.prenom }} {{ app.user.nom|upper }}</h4>
+    </div>
+
+    <div id="filtre">
+        <h2>Filtrer les sorties</h2>
+    </div>
+
+    <table id="liste">
+        <thead>
+            <tr>
+                <th>Nom de la sortie</th>
+                <th>Date de la sortie</th>
+                <th>Clôture</th>
+                <th>inscrits / places</th>
+                <th>Etat</th>
+                <th>Inscrit</th>
+                <th>Organisateur</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sortie in sorties %}
+                <tr>
+                    <td>{{ sortie.nom }}</td>
+                    <td>{{ sortie.dateHeureDebut|date('d/m/Y H:i') }}</td>
+                    <td>{{ sortie.dateLimiteInscription|date('d/m/Y') }}</td>
+                    <td>{{ sortie.listeParticipants|length }} / {{ sortie.nbInscriptionsMax }}</td>
+                    <td>{{ sortie.etat.libelle }}</td>
+                    <td></td>
+                    <td>{{ sortie.organisateur.pseudo }}</td>
+                    <td>Afficher - S'inscrire - Se désister - Modifier - Publier - Annuler</td>
+                </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
+    {# TODO : changer la route du lien #}
+    <a href="{{ path('sortie_liste') }}"><button id="btnCreer">Créer une sortie</button></a>
 {% endblock %}

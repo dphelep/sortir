@@ -32,3 +32,57 @@ footer {
     bottom: 50px;
     left: 735px;
 }
+
+/* Modification du profil */
+.profil {
+    background-color: aqua;
+    text-align: center;
+    padding: 50px 0 50px 0;
+}
+
+/* Messages flash */
+.flash {
+    padding: 20px;
+    font-weight: bold;
+    font-size: 1.4rem;
+    margin: 1rem 0;
+    border-radius: 5px;
+    color: #132135;
+}
+
+.flash-success {
+    background-color: lawngreen
+}
+
+.flash-error {
+    background-color: red
+}
+
+/* Page d'accueil */
+#infos {
+    text-align: right;
+}
+
+#liste {
+    width: 90%;
+    text-align: center;
+    margin: auto;
+}
+
+table, tr, td, th {
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+thead {
+    background-color: silver;
+}
+
+tr:nth-child(even) {
+    background-color: yellowgreen;
+}
+
+#btnCreer {
+    margin-top: 20px;
+}

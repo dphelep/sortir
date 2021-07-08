@@ -5,10 +5,14 @@
 {% endblock %}
 
 {% block body %}
-    <h2>Mon Profil</h2>
-    {{ form_start(profilForm) }}
-    {{ form_widget(profilForm) }}
-    <button type="submit">Enregistrer</button>
-    {{ form_end(profilForm) }}
-    <a href="{{ path('sortie_liste') }}"><button>Annuler</button></a>
+    <div class="profil">
+        <h2>Mon Profil</h2>
+        {{ form_start(profilForm) }}
+        {{ form_widget(profilForm) }}
+        <button type="submit">Enregistrer</button>
+        <a href="{{ path('sortie_liste') }}"><button>Annuler</button></a>
+        {{ form_end(profilForm) }}
+
+    </div>
+
 {% endblock %}
