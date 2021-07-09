@@ -48,18 +48,15 @@ class SortieController extends AbstractController
         $sortie = new Sortie();
         $sortieForm = $this->createForm(SortieType::class, $sortie);
 
-        $user = $participantRepository->find($this->getUser());
-
         $sortieForm->handleRequest($request);
 
         if($sortieForm->isSubmitted() && $sortieForm->isValid()) {
 
             $etat = $etatRepository->findOneBy(["libelle" => "Créée"]);
-            $campus = $campusRepository->findOneBy(["nom" => $user->getCampus()]);
 
             $sortie->setEtat($etat);
             $sortie->setOrganisateur($this->getUser());
-            $sortie->setSiteOrganisateur($campus);
+            $sortie->setSiteOrganisateur($this->getUser()->getCampus());
 
             $entityManager->persist($sortie);
             $entityManager->flush();
@@ -130,7 +127,21 @@ class SortieController extends AbstractController
      */
     public function modifier(int $id, Request $request, EntityManagerInterface $entityManager, SortieRepository $sortieRepository) {
 
+        $sortie = $sortieRepository->find($id);
+        $sortieForm = $this->createForm(SortieType::class, $sortie);
 
+        $sortieForm->handleRequest($request);
 
+        if($sortieForm->isSubmitted() && $sortieForm->isValid()) {
+
+            $entityManager->persist($sortie);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Sortie modifiée !');
+            return $this->redirectToRoute('sortie_liste', ['id' => $sortie->getId()]);
+        }
+        return $this->render('sortie/modifier.html.twig', [
+            'sortieForm' => $sortieForm->createView()
+        ]);
     }
 }
