@@ -2,8 +2,8 @@
 
 namespace App\Form;
 
+use App\Class\Filtre;
 use App\Entity\Campus;
-use App\Entity\Sortie;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -11,7 +11,6 @@ use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use function Sodium\add;
 
 class FiltreType extends AbstractType
 {
@@ -20,14 +19,15 @@ class FiltreType extends AbstractType
         $builder
             ->add('campus', EntityType::class, [
                 'class' => Campus::class,
+                'required' => false,
                 'label' => 'Campus : ',
-                'choice_label' => 'nom_campus'
+                'choice_label' => 'nom'
             ])
             ->add('motCle', SearchType::class, [
                 'label' => 'Le nom de la sortie contient : ',
                 'required' => false,
                 'attr' => [
-                    'placeholder' => 'Rechercher'
+                    'placeholder' => 'Mot à rechercher'
                 ]
             ])
             ->add('dateDebutRecherche', DateTimeType::class, [
@@ -61,7 +61,7 @@ class FiltreType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Sortie::class,
+            'data_class' => Filtre::class,
         ]);
     }
 }

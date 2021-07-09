@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Class\Filtre;
+use App\Form\FiltreType;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,19 +16,18 @@ class SortieController extends AbstractController
     /**
      * @Route("/accueil", name="sortie_liste")
      */
-    public function liste(SortieRepository $sortieRepository): Response
+    public function liste(Request $request,
+                          SortieRepository $sortieRepository): Response
     {
         $sorties = $sortieRepository->findAll();
+        $filtre = new Filtre();
+        $filtreForm = $this->createForm(FiltreType::class, $filtre);
+        $filtreForm->handleRequest($request);
 
         return $this->render('sortie/liste.html.twig', [
             'sorties' => $sorties,
+            'filtreForm' => $filtreForm->createView(),
         ]);
-    }
-
-    public function filtrer(Request $request,
-                            EntityManagerInterface $entityManager,): Response {
-
-
     }
 
     public function creer() {

@@ -28,6 +28,7 @@ class ProfilType extends AbstractType
                 'invalid_message' => 'Les deux mots de passe doivent correspondre.',
                 'first_options' => ['label' => 'Mot de passe'],
                 'second_options' => ['label' => 'Confirmation'],
+                'required' => false,
             ])
             ->add('campus', EntityType::class, [
                 'class' => Campus::class,
