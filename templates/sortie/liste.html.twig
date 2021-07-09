@@ -7,7 +7,9 @@
 {% block body %}
     <div id="infos">
         <h4>Date du jour : {{ "now"|date('d/m/Y') }}</h4>
+       {% if app.user%}
         <h4>Participant : {{ app.user.prenom }} {{ app.user.nom|upper }}</h4>
+        {% endif %}
     </div>
 
     <div id="filtre">
@@ -52,7 +54,7 @@
                             <a href="{{ path('sortie_detail', {'id' : sortie.id }) }}">Afficher</a>
                         {% else %}
                             <a href="{{ path('sortie_liste', {'id' : sortie.id }) }}">Modifier</a>
-                            <a href="{{ path('sortie_liste', {'id' : sortie.id }) }}">Annuler</a>
+                            <a href="{{ path('sortie_annuler', {'id' : sortie.id }) }}">Annuler</a>
                             <a href="{{ path('sortie_liste', {'id' : sortie.id }) }}">Publier</a>
                         {% endif %}
 

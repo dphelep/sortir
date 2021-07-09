@@ -109,25 +109,25 @@ class AppFixtures extends Fixture
         $manager->flush();
 
         //participant
-
+        $rolesu=['ROLE_USER'];
         $instCampus = $this->atbCampusRepo->findAll();
         $participants = [];
         for ($i = 0; $i < 20; $i++) {
             $participant = new Participant();
             $participant->setPseudo($generator->userName)
-            ->setPrenom($generator->lastName)
-            ->setNom($generator->firstName)
-            ->setTelephone($generator->phoneNumber)
-            ->setMail($generator->email)
-            ->setPassword($this->passwordEncoder->encodePassword(
-                         $participant,'password'))
-            ->setRoles([])
-            ->setActif(true)
-            ->setCampus($generator->randomElement($instCampus));
+                ->setPrenom($generator->lastName)
+                ->setNom($generator->firstName)
+                ->setTelephone($generator->phoneNumber)
+                ->setMail($generator->email)
+                ->setPassword($this->passwordEncoder->encodePassword(
+                    $participant,'password'))
+                ->setRoles($rolesu)
+                ->setActif(true)
+                ->setCampus($generator->randomElement($instCampus));
             $participants[] = $participant;
             $manager->persist($participant);
         }
-
+        $rolesad=['ROLE_ADMIN'];
         $mail = ['davidp@eni.fr','davidh@eni.fr','laurad@eni.fr'];
         $pseudos = ['davidp', 'davidh', 'laurad'];
         $passwords = ['mdp','mdp','mdp'];
@@ -143,7 +143,7 @@ class AppFixtures extends Fixture
                     $participant,
                     $passwords[$i]
                 ))
-                ->setRoles([])
+                ->setRoles( $rolesad)
                 ->setActif(true)
                 ->setCampus($generator->randomElement($instCampus));
             $manager->persist($participant);
@@ -160,22 +160,22 @@ class AppFixtures extends Fixture
         $sortieInfo= ["Tu comprends, tu vois au passage qu'il n'y a rien de concret car là, j'ai un chien en ce moment à côté de moi et je le caresse, et ça, c'est très dur, et, et, et... c'est très facile en même temps. Mais ça, c'est uniquement lié au spirit. ",
             "Tu vois, je suis mon meilleur modèle car il faut se recréer... pour recréer... a better you et cela même si les gens ne le savent pas ! Donc on n'est jamais seul spirituellement ! ",
             "Même si on se ment, après il faut s'intégrer tout ça dans les environnements et en vérité, la vérité, il n'y a pas de vérité et cette officialité peut vraiment retarder ce qui devrait devenir... Et là, vraiment, j'essaie de tout coeur de donner la plus belle réponse de la terre ! "];
-       for ($i = 0; $i <= 20; $i++) {
+        for ($i = 0; $i <= 20; $i++) {
             $sortie = new Sortie();
-           $dateDeb = ($generator->dateTimeBetween('+10days','+30days'));
-           $dateFinInsc = ($dateDeb);
-           $organiseSortie = $generator->randomElement($instParticipants);
-           $lieuSortie =  $generator->randomElement($instLieu) ;
+            $dateDeb = ($generator->dateTimeBetween('+10days','+30days'));
+            $dateFinInsc = ($dateDeb);
+            $organiseSortie = $generator->randomElement($instParticipants);
+            $lieuSortie =  $generator->randomElement($instLieu) ;
             $sortie->setNom($generator->randomElement($sortieNom))
-            ->setInfosSortie($generator->randomElement($sortieInfo))
-           ->SetOrganisateur($organiseSortie)
-            ->setDuree($generator->numberBetween(60,380))
-            ->setNbInscriptionsMax($generator->numberBetween(5,20))
-            ->setDateHeureDebut($dateFinInsc)
-            ->setDateLimiteInscription($dateFinInsc)
-            ->setSiteOrganisateur($generator->randomElement($instCampus))
-            ->setEtat($generator->randomElement($instEtat))
-            ->setLieu($lieuSortie);
+                ->setInfosSortie($generator->randomElement($sortieInfo))
+                ->SetOrganisateur($organiseSortie)
+                ->setDuree($generator->numberBetween(60,380))
+                ->setNbInscriptionsMax($generator->numberBetween(5,20))
+                ->setDateHeureDebut($dateFinInsc)
+                ->setDateLimiteInscription($dateFinInsc)
+                ->setSiteOrganisateur($generator->randomElement($instCampus))
+                ->setEtat($generator->randomElement($instEtat))
+                ->setLieu($lieuSortie);
 
             $manager->persist($sortie);
         }
