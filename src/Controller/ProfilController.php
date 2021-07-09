@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Participant;
 use App\Form\ProfilType;
+use App\Repository\ParticipantRepository;
+use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,6 +38,24 @@ class ProfilController extends AbstractController
 
         return $this->render('profil/monProfil.html.twig', [
             'profilForm' => $profilForm->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/profil/detail/{id}", name="profil_detail")
+     */
+
+    public function detail($id, ParticipantRepository $participantRepository ,SortieRepository $sortieRepository): Response
+    {
+        $participants = $participantRepository->find($id);
+        $sortie = $sortieRepository->findAll();
+        if (!$participants) {
+            throw $this->createNotFoundException("Oops ! Je ne connais pas cette personne !");
+        }
+
+        return $this->render('profil/detail.html.twig', [
+            'participants' => $participants,
+            'sortie' => $sortie
         ]);
     }
 }
