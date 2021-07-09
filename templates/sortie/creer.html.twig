@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ parent()}} | Créer une sortie {% endblock %}
+
+{% block body %}
+    <div class="creer-container">
+    <h2>Créer une sortie</h2>
+    {{ form_start(sortieForm) }}
+
+        <div class="row">
+            <div class="col">
+                {{ form_row(sortieForm.nom) }}
+            </div>
+            <div class="col">
+                Campus : {{ app.user.campus.nom }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                {{ form_row(sortieForm.dateHeureDebut) }}
+            </div>
+            <div class="col">
+                {{ form_row(sortieForm.ville) }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                {{ form_row(sortieForm.dateLimiteInscription) }}
+            </div>
+            <div class="col">
+                {{ form_row(sortieForm.lieu) }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                {{ form_row(sortieForm.nbInscriptionsMax) }}
+            </div>
+            <div class="col">
+                Rue :
+                {% if sortie.lieu %}
+                {{ sortie.lieu.rue }}
+                    {% else %}
+                    null
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                {{ form_row(sortieForm.duree) }} minutes
+            </div>
+            <div class="col">
+                Code postal :
+                {% if sortie.lieu %}
+                {{ sortie.lieu.ville.codePostal }}
+                {% else %}
+                null
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                {{ form_row(sortieForm.infosSortie) }}
+            </div>
+            <div class="col">
+                Latitude :
+                {% if sortie.lieu %}
+                {{ sortie.lieu.latitude }}
+                {% else %}
+                null
+                {% endif %}
+                <br>
+                Longitude :
+                {% if sortie.lieu %}
+                {{ sortie.lieu.longitude }}
+                {% else %}
+                null
+                {% endif %}
+            </div>
+        </div>
+
+    <div class="btn">
+        <button>Enregistrer</button>
+    </div>
+    <div class="btn">
+        <button>Publier la sortie</button>
+    </div>
+    <div class="btn">
+        <button>Annuler</button>
+    </div>
+
+    {{ form_end(sortieForm) }}
+    </div>
+{% endblock %}
+

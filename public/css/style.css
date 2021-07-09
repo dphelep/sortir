@@ -11,9 +11,15 @@ body {
 
 }
 
+.btn {
+    display: inline-block;
+}
+
 .container {
     background-color: aqua;
     text-align: center;
+    margin-left: 600px;
+    margin-right: 600px;
 }
 
 #menu {

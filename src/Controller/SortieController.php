@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
-use App\Form\AnnulerType;
+use App\Entity\Sortie;
+use App\Form\SortieType;
+use App\Repository\CampusRepository;
 use App\Repository\EtatRepository;
 use App\Repository\ParticipantRepository;
+use App\Form\AnnulerType;
 use App\Class\Filtre;
 use App\Form\FiltreType;
 use App\Repository\SortieRepository;
@@ -33,8 +36,42 @@ class SortieController extends AbstractController
         ]);
     }
 
-    public function creer() {
+    /**
+     * @Route("/sortie/creer", name="sortie_creer")
+     */
+    public function creer(Request $request,
+                          EntityManagerInterface $entityManager,
+                          EtatRepository $etatRepository,
+                          CampusRepository $campusRepository,
+                          ParticipantRepository $participantRepository): Response {
 
+        $sortie = new Sortie();
+        $sortieForm = $this->createForm(SortieType::class, $sortie);
+
+        $user = $participantRepository->find($this->getUser());
+
+        $sortieForm->handleRequest($request);
+
+        if($sortieForm->isSubmitted() && $sortieForm->isValid()) {
+
+            $etat = $etatRepository->findOneBy(["libelle" => "Créée"]);
+            $campus = $campusRepository->findOneBy(["nom" => $user->getCampus()]);
+
+            $sortie->setEtat($etat);
+            $sortie->setOrganisateur($this->getUser());
+            $sortie->setSiteOrganisateur($campus);
+
+            $entityManager->persist($sortie);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'La sortie a bien été ajoutée !');
+            return $this->redirectToRoute('sortie_liste');
+        }
+
+        return $this->render('sortie/creer.html.twig', [
+            'sortieForm' => $sortieForm->createView(),
+            'sortie' => $sortie,
+        ]);
     }
 
     /**
@@ -86,5 +123,14 @@ class SortieController extends AbstractController
             'annulerForm' => $annulerForm->createView(),
             'sortie' => $sortie
         ]);
+    }
+
+    /**
+     * @Route("/sortie/modifier/{id}", name="sortie_modifier")
+     */
+    public function modifier(int $id, Request $request, EntityManagerInterface $entityManager, SortieRepository $sortieRepository) {
+
+
+
     }
 }
