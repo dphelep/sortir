@@ -20,7 +20,7 @@ body {
     display: inline-block;
 }
 
-.btnAjoutlieu {
+#btnAjoutlieu {
     border-radius: 50%;
 }
 

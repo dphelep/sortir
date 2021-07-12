@@ -84,7 +84,7 @@ class AppFixtures extends Fixture
         }
         //Etat : 6 Etats
         $etatlibelle = ['En création', 'Créée', 'Ouverte', 'Clôturée',
-            'Activité en cours', 'Passée', 'Annulée', 'Historisée'];
+            'Activité en cours', 'Passée'];
         $etatlibelles = [];
         foreach ($etatlibelle as $libelle) {
             $etat = new Etat();
@@ -106,7 +106,7 @@ class AppFixtures extends Fixture
 
             $lieu = new Lieu();
             $lieu->setNom($generator->word)
-                ->setRue($generator->address)
+                ->setRue($generator->streetAddress)
                 ->setLatitude($generator->latitude)
                 ->setLongitude($generator->longitude)
                 ->setVille($generator->randomElement($instancesVilles));

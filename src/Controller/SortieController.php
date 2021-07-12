@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+
+use App\Entity\Participant;
 use App\Entity\Sortie;
+
 use App\Form\SortieType;
 use App\Repository\CampusRepository;
 use App\Repository\EtatRepository;
@@ -16,6 +19,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 class SortieController extends AbstractController
 {
@@ -43,14 +47,15 @@ class SortieController extends AbstractController
                           EntityManagerInterface $entityManager,
                           EtatRepository $etatRepository,
                           CampusRepository $campusRepository,
-                          ParticipantRepository $participantRepository): Response {
+                          ParticipantRepository $participantRepository): Response
+    {
 
         $sortie = new Sortie();
         $sortieForm = $this->createForm(SortieType::class, $sortie);
 
         $sortieForm->handleRequest($request);
 
-        if($sortieForm->isSubmitted() && $sortieForm->isValid()) {
+        if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
 
             $etat = $etatRepository->findOneBy(["libelle" => "Créée"]);
 
@@ -88,6 +93,7 @@ class SortieController extends AbstractController
             'participants' => $participants
         ]);
     }
+
     /**
      * @Route("/sortie/annuler/{id}", name="sortie_annuler")
      */
@@ -105,14 +111,14 @@ class SortieController extends AbstractController
         if (!$sortie) {
             throw $this->createNotFoundException("Oops ! La sortie n'existe pas !");
         }
-        if ($annulerForm->isSubmitted() && $annulerForm->isValid()){
-            $etat = $etatRepository->findOneBy(['libelle'=>'Annulée']);
-            $sortie -> setEtat($etat);
+        if ($annulerForm->isSubmitted() && $annulerForm->isValid()) {
+            $etat = $etatRepository->findOneBy(['libelle' => 'Annulée']);
+            $sortie->setEtat($etat);
 
-        $entityManager->persist($sortie);
-        $entityManager->flush();
+            $entityManager->persist($sortie);
+            $entityManager->flush();
 
-        $this->addFlash('success', 'La sortie a été annulée !');
+            $this->addFlash('success', 'La sortie a été annulée !');
 
             return $this->redirectToRoute('sortie_liste', ['id' => $sortie->getId()]);
         }
@@ -125,14 +131,19 @@ class SortieController extends AbstractController
     /**
      * @Route("/sortie/modifier/{id}", name="sortie_modifier")
      */
-    public function modifier(int $id, Request $request, EntityManagerInterface $entityManager, SortieRepository $sortieRepository) {
+    public function modifier(int $id, Request $request, EntityManagerInterface $entityManager, SortieRepository $sortieRepository)
+    {
 
         $sortie = $sortieRepository->find($id);
         $sortieForm = $this->createForm(SortieType::class, $sortie);
 
         $sortieForm->handleRequest($request);
 
-        if($sortieForm->isSubmitted() && $sortieForm->isValid()) {
+        if (!$sortie) {
+            throw $this->createNotFoundException("Oops ! La sortie n'existe pas !");
+        }
+
+        if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
 
             $entityManager->persist($sortie);
             $entityManager->flush();
@@ -143,5 +154,61 @@ class SortieController extends AbstractController
         return $this->render('sortie/modifier.html.twig', [
             'sortieForm' => $sortieForm->createView()
         ]);
+    }
+
+    /**
+     * Inscription a une Sortie
+     * @Route("/sortie/inscription/{id}", name="sortie_inscription")
+     */
+    public function inscription(int $id,
+                                EntityManagerInterface $entityManager,
+                                SortieRepository $sortieRepository,
+                                Participant $participant
+                                ): Response
+    {
+
+        $sortie = $sortieRepository->find($id);
+        $sortie->addParticipant($this->getUser());
+        if (!$sortie) {
+            throw $this->createNotFoundException("Oops ! La sortie n'existe pas !");
+        }
+        if (!$participant) {
+            throw $this->createNotFoundException("Oops ! Le Participant n'existe pas !");
+        }
+
+        $entityManager->persist($sortie);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Vous etes bien inscrit !');
+        return $this->redirectToRoute('sortie_liste');
+    }
+
+    /**
+     * Inscription a une Sortie
+     * @Route("/sortie/desinscription/{id}", name="sortie_desinscription")
+     */
+    public function desinscription(int $id,
+                                   EntityManagerInterface $entityManager,
+                                   SortieRepository $sortieRepository,
+                                    Participant $participant,
+                                    ): Response
+    {
+
+        $sortie = $sortieRepository->find($id);
+        $sortie-> removeParticipant($this->getUser());
+
+        if (!$sortie) {
+            throw $this->createNotFoundException("Oops ! La sortie n'existe pas !");
+        }
+        if (!$participant) {
+            throw $this->createNotFoundException("Oops ! Le Participant n'existe pas !");
+        }
+
+
+        $entityManager->persist($sortie);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Vous n\'etes plus inscrit a cette sortie !');
+        return $this->redirectToRoute('sortie_liste');
     }
 }

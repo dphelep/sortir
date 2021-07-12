@@ -56,6 +56,7 @@ class SortieType extends AbstractType
                 'class'=> Lieu::class,
                 'choice_label' => 'nom',
             ]);
+
     }
 
     public function configureOptions(OptionsResolver $resolver)
