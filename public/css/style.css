@@ -1,4 +1,9 @@
 body {
+    display: block;
+    padding-left: 10%;
+    padding-right: 10%;
+
+
     font-family: 'Montserrat Alternates', sans-serif;
 }
 
@@ -75,6 +80,7 @@ footer {
 
 #liste {
     width: 90%;
+    height: 200px;
     text-align: center;
     margin: auto;
 }
@@ -99,23 +105,40 @@ tr:nth-child(even) {
 
 /*page detail sortie*/
 
+
 .sortie_gauche {
 
-
-    width: 40%;
-    margin: 20px;
-
-}
+    display: inline-block;
+    line-height: 160%;
+    width: 30%;
+    margin-top: 20px;
+    margin-left: 20%;
+    margin-right: 20px;
+    margin-bottom: 20px;
+  }
 
 .sortie_droite {
-    width: 40%;
-    margin: 20px;
-}
-#liste_participants {
+    position: absolute;
+    display: inline-block;
+    line-height: 160%;
     width: 30%;
-    margin: 20px;
+    margin-top: 20px;
+    margin-left: 40px;
 
 }
+.tab_list{
+    display: flow;
+    height: 200px;
+    width: 440px;
+    overflow: auto;
+}
+
+.tab_list_tr{
+    height: 30px;
+    width: 220px;
+
+}
+
 
 /*page annuler sortie*/
 
@@ -124,5 +147,11 @@ tr:nth-child(even) {
     margin-left: 40%;
     position: center;
 
+
+}
+
+/*page detail profil*/
+.affiche_profil{
+    line-height: 170%;
 
 }

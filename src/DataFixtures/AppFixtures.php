@@ -12,6 +12,7 @@ use App\Repository\CampusRepository;
 use App\Repository\EtatRepository;
 use App\Repository\LieuRepository;
 use App\Repository\ParticipantRepository;
+use App\Repository\SortieRepository;
 use App\Repository\VilleRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -28,13 +29,17 @@ class AppFixtures extends Fixture
     private $atbLieuRepo;
     private $atbParticipantRepo;
     private $atbEtatRepo;
+    private $atbSortieRepo;
+
 
     public function __construct(VilleRepository $instanceVilleRepository,
                                 CampusRepository $instCampusRepo,
                                 UserPasswordEncoderInterface $passwordEncoder,
                                 LieuRepository $instLieuRepo,
                                 ParticipantRepository $instParticipantRepo,
-                                EtatRepository $instEtatRepo)
+                                EtatRepository $instEtatRepo,
+                                SortieRepository $instSortieRepo,
+                                )
     {
         $this->attributVilleRepository = $instanceVilleRepository;
         $this->atbCampusRepo = $instCampusRepo;
@@ -42,6 +47,8 @@ class AppFixtures extends Fixture
         $this->atbLieuRepo = $instLieuRepo;
         $this->atbParticipantRepo = $instParticipantRepo;
         $this->atbEtatRepo = $instEtatRepo;
+        $this->atbSortieRepo = $instSortieRepo;
+
     }
 
 
@@ -153,6 +160,7 @@ class AppFixtures extends Fixture
 
         //Sortie
 
+
         $instEtat = $this->atbEtatRepo->findAll();
         $instLieu = $this->atbLieuRepo->findAll();
         $instParticipants = $this->atbParticipantRepo->findAll();
@@ -160,24 +168,48 @@ class AppFixtures extends Fixture
         $sortieInfo= ["Tu comprends, tu vois au passage qu'il n'y a rien de concret car là, j'ai un chien en ce moment à côté de moi et je le caresse, et ça, c'est très dur, et, et, et... c'est très facile en même temps. Mais ça, c'est uniquement lié au spirit. ",
             "Tu vois, je suis mon meilleur modèle car il faut se recréer... pour recréer... a better you et cela même si les gens ne le savent pas ! Donc on n'est jamais seul spirituellement ! ",
             "Même si on se ment, après il faut s'intégrer tout ça dans les environnements et en vérité, la vérité, il n'y a pas de vérité et cette officialité peut vraiment retarder ce qui devrait devenir... Et là, vraiment, j'essaie de tout coeur de donner la plus belle réponse de la terre ! "];
-        for ($i = 0; $i <= 20; $i++) {
+        for ($i = 0; $i <= 25; $i++) {
             $sortie = new Sortie();
-            $dateDeb = ($generator->dateTimeBetween('+10days','+30days'));
-            $dateFinInsc = ($dateDeb);
             $organiseSortie = $generator->randomElement($instParticipants);
             $lieuSortie =  $generator->randomElement($instLieu) ;
             $sortie->setNom($generator->randomElement($sortieNom))
                 ->setInfosSortie($generator->randomElement($sortieInfo))
                 ->SetOrganisateur($organiseSortie)
                 ->setDuree($generator->numberBetween(60,380))
-                ->setNbInscriptionsMax($generator->numberBetween(5,20))
-                ->setDateHeureDebut($dateFinInsc)
-                ->setDateLimiteInscription($dateFinInsc)
+                ->setNbInscriptionsMax($generator->numberBetween(10,30))
                 ->setSiteOrganisateur($generator->randomElement($instCampus))
                 ->setEtat($generator->randomElement($instEtat))
-                ->setLieu($lieuSortie);
-
+                ->setLieu($lieuSortie)
+                ->addParticipant($generator->randomElement($participants))
+                ->addParticipant($generator->randomElement($participants))
+                ->addParticipant($generator->randomElement($participants))
+                ->addParticipant($generator->randomElement($participants))
+                ->addParticipant($generator->randomElement($participants))
+                ->addParticipant($generator->randomElement($participants))
+                ->addParticipant($generator->randomElement($participants))
+                ->addParticipant($generator->randomElement($participants))
+                ->addParticipant($generator->randomElement($participants));
             $manager->persist($sortie);
+
+
+
+
+            $date1 = $generator->dateTimeBetween('-40days', '+40days');
+            $date2 = $generator->dateTimeBetween('-40days', '+40days');
+
+            if ($date1 > $date2) {
+                $sortie->setDateHeureDebut($date1)
+                ->setDateLimiteInscription($date2);
+            } else {
+                $sortie->setDateHeureDebut($date2)
+                ->setDateLimiteInscription($date1);
+                $manager->persist($sortie);
+            }
+
+          //  for ($i = 0; $i <= 5; $i++) {
+           //     $sortie->addParticipant($generator->randomElement( $participants));
+//            }
+
         }
 
         $manager->flush();
