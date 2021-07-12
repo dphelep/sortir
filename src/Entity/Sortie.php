@@ -6,6 +6,7 @@ use App\Repository\SortieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=SortieRepository::class)
@@ -20,17 +21,28 @@ class Sortie
     private $id;
 
     /**
+     * @Assert\NotBlank(message="Ce champ est obligatoire")
+     * @Assert\Length(
+     *     min=5,
+     *     max=255,
+     *     minMessage="Le nom de la sortie doit comporter 5 caractères minimum",
+     *     maxMessage="Nombre de caractères maximum (255) atteint !")
      * @ORM\Column(type="string", length=255)
      */
     private $nom;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Assert\GreaterThan(propertyPath="dateLimiteInscription")
      */
     private $dateHeureDebut;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="integer",
+     *     message="Veuillez saisir un nombre entier"
+     * )
      */
     private $duree;
 

@@ -30,7 +30,8 @@
                 {{ form_row(sortieForm.dateLimiteInscription) }}
             </div>
             <div class="col">
-                {{ form_row(sortieForm.lieu) }}
+                <span>{{ form_row(sortieForm.lieu) }}</span>
+                <span><button id="btnAjoutLieu">+</button></span>
             </div>
         </div>
 
@@ -50,7 +51,8 @@
 
         <div class="row">
             <div class="col">
-                {{ form_row(sortieForm.duree) }} minutes
+                <span>{{ form_row(sortieForm.duree) }}</span>
+                <span>minutes</span>
             </div>
             <div class="col">
                 Code postal :

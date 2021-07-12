@@ -137,7 +137,7 @@ class SortieController extends AbstractController
             $entityManager->persist($sortie);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Sortie modifiée !');
+            $this->addFlash('success', 'La sortie a été modifiée !');
             return $this->redirectToRoute('sortie_liste', ['id' => $sortie->getId()]);
         }
         return $this->render('sortie/modifier.html.twig', [

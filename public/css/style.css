@@ -20,6 +20,10 @@ body {
     display: inline-block;
 }
 
+.btnAjoutlieu {
+    border-radius: 50%;
+}
+
 .container {
     background-color: aqua;
     text-align: center;
