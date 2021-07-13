@@ -14,16 +14,19 @@ body {
 
 }
 
-.btn {
+.btn, .duree {
     display: inline-block;
+}
+
+.btnContainer {
+    text-align: center;
 }
 
 #btnAjoutlieu {
     border-radius: 50%;
 }
 
-.container {
-    background-color: aqua;
+.container, .titreCreer, .titreModifier {
     text-align: center;
     margin-left: 600px;
     margin-right: 600px;
@@ -65,7 +68,7 @@ footer {
     position: relative;
     padding-top: 30px;
     bottom: 50px;
-    left: 735px;
+    left: 600px;
 }
 
 /* Modification du profil */
@@ -150,7 +153,10 @@ label, input {
     display: inline-block;
     line-height: 160%;
     width: 30%;
-    margin: 20px 20px 20px 20%;
+    margin-top: 20px;
+    margin-left: 20%;
+    margin-right: 20px;
+    margin-bottom: 20px;
 }
 
 .sortie_droite {
@@ -160,7 +166,6 @@ label, input {
     width: 30%;
     margin-top: 20px;
     margin-left: 40px;
-
 }
 
 .tab_list{

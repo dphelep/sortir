@@ -21,19 +21,20 @@ class Sortie
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Ce champ est obligatoire")
      * @Assert\Length(
      *     min=5,
      *     max=255,
      *     minMessage="Le nom de la sortie doit comporter 5 caractères minimum",
      *     maxMessage="Nombre de caractères maximum (255) atteint !")
-     * @ORM\Column(type="string", length=255)
      */
     private $nom;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Assert\GreaterThan(propertyPath="dateLimiteInscription")
+     * @Assert\GreaterThan(propertyPath="dateLimiteInscription", message="La date de la sortie doit être postérieure à la date limite d'inscription")
+     * @Assert\GreaterThan("today", message="La date de la sortie doit être postérieure à la date du jour")
      */
     private $dateHeureDebut;
 
@@ -48,16 +49,28 @@ class Sortie
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Assert\GreaterThan("today", message="La date limite d'inscription doit être postérieure à la date du jour")
      */
     private $dateLimiteInscription;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="integer",
+     *     message="Veuillez saisir un nombre entier"
+     * )
      */
     private $nbInscriptionsMax;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Assert\Length(
+     *     min=10,
+     *     max=500,
+     *     minMessage="La description de la sortie doit comporter 10 caractères minimum",
+     *     maxMessage="Nombre de caractères maximum (500) atteint !"
+     * )
+     * @Assert\Regex("/^\w+/")
      */
     private $infosSortie;
 

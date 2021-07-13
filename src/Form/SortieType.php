@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -55,6 +56,12 @@ class SortieType extends AbstractType
                 'label' => 'Lieu : ',
                 'class'=> Lieu::class,
                 'choice_label' => 'nom',
+            ])
+            ->add('btnEnregistrer', SubmitType::class, [
+                'label' => 'Enregistrer'
+            ])
+            ->add('btnPublier', SubmitType::class, [
+                'label' => 'Publier la sortie'
             ]);
 
     }
