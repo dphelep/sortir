@@ -14,7 +14,7 @@ body {
 
 }
 
-.btn, .duree {
+.btn, .duree, .ajout {
     display: inline-block;
 }
 
@@ -24,6 +24,10 @@ body {
 
 #btnAjoutlieu {
     border-radius: 50%;
+}
+
+#btnAnnuler {
+    background-color: red;
 }
 
 .container, .titreCreer, .titreModifier {

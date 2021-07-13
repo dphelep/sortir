@@ -6,7 +6,6 @@ namespace App\Controller;
 use App\Entity\Etat;
 use App\Entity\Participant;
 use App\Entity\Sortie;
-
 use App\Form\SortieType;
 use App\Repository\CampusRepository;
 use App\Repository\EtatRepository;
@@ -69,7 +68,7 @@ class SortieController extends AbstractController
             }
 
             if($sortieForm->get('btnPublier')->isClicked()) {
-                $etat = $etatRepository->findOneBy(["libelle" => "Créée"]);
+                $etat = $etatRepository->findOneBy(["libelle" => "Ouverte"]);
             }
 
             $sortie->setEtat($etat);
@@ -163,7 +162,13 @@ class SortieController extends AbstractController
 
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
 
-            $etat = $etatRepository->findOneBy(["libelle" => "Créée"]);
+            if($sortieForm->get('btnEnregistrer')->isClicked()) {
+                $etat = $etatRepository->findOneBy(["libelle" => "En création"]);
+            }
+
+            if($sortieForm->get('btnPublier')->isClicked()) {
+                $etat = $etatRepository->findOneBy(["libelle" => "Ouverte"]);
+            }
 
             $sortie->setEtat($etat);
             $sortie->setOrganisateur($this->getUser());
@@ -186,7 +191,6 @@ class SortieController extends AbstractController
      * @Route("/sortie/supprimer/{id}", name="sortie_supprimer")
      */
     public function supprimer($id,
-                              Request $request,
                               EntityManagerInterface $entityManager,
                               SortieRepository $sortieRepository): Response
     {
@@ -210,8 +214,7 @@ class SortieController extends AbstractController
      */
     public function inscription(int $id,
                                 EntityManagerInterface $entityManager,
-                                SortieRepository $sortieRepository,
-                                Participant $participant
+                                SortieRepository $sortieRepository
                                 ): Response
     {
 
@@ -220,14 +223,15 @@ class SortieController extends AbstractController
         if (!$sortie) {
             throw $this->createNotFoundException("Oops ! La sortie n'existe pas !");
         }
-        if (!$participant) {
-            throw $this->createNotFoundException("Oops ! Le Participant n'existe pas !");
-        }
+        /*if (!$participant) {
+            throw $this->createNotFoundException("Oops ! Le participant n'existe pas !");
+        }*/
 
         $entityManager->persist($sortie);
         $entityManager->flush();
 
-        $this->addFlash('success', 'Vous etes bien inscrit !');
+        $this->addFlash('success', 'Vous êtes bien inscrit !');
+
         return $this->redirectToRoute('sortie_liste');
     }
 
@@ -249,14 +253,38 @@ class SortieController extends AbstractController
             throw $this->createNotFoundException("Oops ! La sortie n'existe pas !");
         }
         if (!$participant) {
-            throw $this->createNotFoundException("Oops ! Le Participant n'existe pas !");
+            throw $this->createNotFoundException("Oops ! Le participant n'existe pas !");
         }
 
 
         $entityManager->persist($sortie);
         $entityManager->flush();
 
-        $this->addFlash('success', 'Vous n\'etes plus inscrit a cette sortie !');
+        $this->addFlash('success', 'Vous n\'êtes plus inscrit à cette sortie !');
         return $this->redirectToRoute('sortie_liste');
     }
+
+    /**
+     * @Route("/sortie/publier/{id}", name="sortie_publier")
+     */
+    public function publier($id,
+                            EtatRepository $etatRepository,
+                            EntityManagerInterface $entityManager,
+                            SortieRepository $sortieRepository)
+    {
+        $sortie = $sortieRepository->find($id);
+
+        if(!$sortie) {
+            throw $this->createNotFoundException("Oops ! Cette sortie n'existe pas !");
+        }
+
+        $etat = $etatRepository->findOneBy(["libelle" => "Ouverte"]);
+
+        $sortie->setEtat($etat);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'La sortie a été publiée !');
+        return $this->redirectToRoute('sortie_liste');
+    }
+
 }
