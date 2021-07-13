@@ -10,8 +10,9 @@
         {{ form_start(lieuForm) }}
         {{ form_widget(lieuForm) }}
         <button type="submit">Enregistrer</button>
+        <a href="{{ path('sortie_creer') }}"><button type="button">Annuler</button></a>
         {{ form_end(lieuForm) }}
-        <a href="{{ path('sortie_creer') }}"><button>Annuler</button></a>
+
 
     </div>
 

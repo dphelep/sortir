@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Etat;
 use App\Entity\Participant;
 use App\Entity\Sortie;
 
@@ -29,6 +30,7 @@ class SortieController extends AbstractController
     public function liste(Request $request,
                           SortieRepository $sortieRepository): Response
     {
+
         $sorties = $sortieRepository->findAll();
         $filtre = new Filtre();
         $filtreForm = $this->createForm(FiltreType::class, $filtre);
@@ -38,6 +40,7 @@ class SortieController extends AbstractController
         if ($filtreForm->isSubmitted() && $filtreForm->isValid()) {
             $sorties = $sortieRepository->findSorties($filtre);
         }
+
 
         return $this->render('sortie/liste.html.twig', [
             'sorties' => $sorties,
@@ -51,8 +54,7 @@ class SortieController extends AbstractController
     public function creer(Request $request,
                           EntityManagerInterface $entityManager,
                           EtatRepository $etatRepository,
-                          CampusRepository $campusRepository,
-                          ParticipantRepository $participantRepository): Response
+                         ): Response
     {
 
         $sortie = new Sortie();
@@ -90,8 +92,11 @@ class SortieController extends AbstractController
      * @Route("/sortie/detail/{id}", name="sortie_detail")
      */
 
-    public function detail($id, SortieRepository $sortieRepository, ParticipantRepository $participantRepository): Response
+    public function detail($id,
+                           SortieRepository $sortieRepository,
+                           ParticipantRepository $participantRepository): Response
     {
+
         $sortie = $sortieRepository->find($id);
         $participants = $participantRepository->findAll();
         if (!$sortie) {

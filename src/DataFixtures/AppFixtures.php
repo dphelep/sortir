@@ -29,7 +29,6 @@ class AppFixtures extends Fixture
     private $atbLieuRepo;
     private $atbParticipantRepo;
     private $atbEtatRepo;
-    private $atbSortieRepo;
 
 
     public function __construct(VilleRepository $instanceVilleRepository,
@@ -38,7 +37,6 @@ class AppFixtures extends Fixture
                                 LieuRepository $instLieuRepo,
                                 ParticipantRepository $instParticipantRepo,
                                 EtatRepository $instEtatRepo,
-                                SortieRepository $instSortieRepo,
                                 )
     {
         $this->attributVilleRepository = $instanceVilleRepository;
@@ -47,7 +45,6 @@ class AppFixtures extends Fixture
         $this->atbLieuRepo = $instLieuRepo;
         $this->atbParticipantRepo = $instParticipantRepo;
         $this->atbEtatRepo = $instEtatRepo;
-        $this->atbSortieRepo = $instSortieRepo;
 
     }
 
@@ -83,8 +80,8 @@ class AppFixtures extends Fixture
 
         }
         //Etat : 6 Etats
-        $etatlibelle = ['En création', 'Créée', 'Ouverte', 'Clôturée',
-            'Activité en cours', 'Passée'];
+        $etatlibelle = ['En création', 'Créée', 'Ouverte',
+            'Activité en cours','Passée','Annulée','Historisée'];
         $etatlibelles = [];
         foreach ($etatlibelle as $libelle) {
             $etat = new Etat();
@@ -178,7 +175,6 @@ class AppFixtures extends Fixture
                 ->setDuree($generator->numberBetween(60,380))
                 ->setNbInscriptionsMax($generator->numberBetween(10,30))
                 ->setSiteOrganisateur($generator->randomElement($instCampus))
-                ->setEtat($generator->randomElement($instEtat))
                 ->setLieu($lieuSortie)
                 ->addParticipant($generator->randomElement($participants))
                 ->addParticipant($generator->randomElement($participants))
@@ -194,8 +190,8 @@ class AppFixtures extends Fixture
 
 
 
-            $date1 = $generator->dateTimeBetween('-40days', '+40days');
-            $date2 = $generator->dateTimeBetween('-40days', '+40days');
+            $date1 = $generator->dateTimeBetween('-20days', '+40days');
+            $date2 = $generator->dateTimeBetween('-20days', '+40days');
 
             if ($date1 > $date2) {
                 $sortie->setDateHeureDebut($date1)
@@ -205,6 +201,8 @@ class AppFixtures extends Fixture
                 ->setDateLimiteInscription($date1);
                 $manager->persist($sortie);
             }
+
+            $sortie->setEtat($generator->randomElement($instEtat));
 
           //  for ($i = 0; $i <= 5; $i++) {
            //     $sortie->addParticipant($generator->randomElement( $participants));

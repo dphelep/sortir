@@ -20,7 +20,8 @@
         <div class="sortie_droite">
             <div>Campus : {{ app.user.campus.nom }}</div>
             <div>{{ form_row(sortieForm.ville) }}</div>
-            <div>{{ form_row(sortieForm.lieu) }}</div>
+            <div class="ajoue">{{ form_row(sortieForm.lieu) }}</div>
+           <div class="ajoue"><a href="{{ path('lieu_creer') }}"><button type="button" id="btnAjoutLieu">+</button></a></div>
             <div>
                 Rue :
                 {% if sortie.lieu %}
@@ -65,6 +66,6 @@
     </div>
 
     {{ form_end(sortieForm) }}
-        <span><a href="{{ path('lieu_creer') }}"><button id="btnAjoutLieu">+</button></a></span>
+
 {% endblock %}
 
