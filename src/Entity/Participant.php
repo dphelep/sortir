@@ -91,7 +91,6 @@ class Participant implements UserInterface
     /**
      * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="participant")
      * @ORM\JoinColumn(nullable=false)
-     * @Assert\Choice(choices={"Chartres-de-Bretagne", "Quimper", "Saint-Herblain", "Niort"})
      */
     private $campus;
 

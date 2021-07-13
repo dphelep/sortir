@@ -62,13 +62,13 @@ class SortieRepository extends ServiceEntityRepository
 
         /* Recherche si inscrit */
         if ($filtre->isSortieInscrit()) {
-            $query->innerJoin('s.participants', 'p', 'WITH', 'p.id = :userId')
-                ->setParameter('userId', $this->security->getUser());
+            $query->andWhere(':user MEMBER OF s.participants')
+                ->setParameter('user', $this->security->getUser());
         }
 
         /* Recherche si non inscrit */
         if ($filtre->isSortieNonInscrit()) {
-            $query->andWhere(':user NOT IN s.participants')
+            $query->andWhere(':user NOT MEMBER OF s.participants')
                 ->setParameter('user', $this->security->getUser());
         }
 
