@@ -2,8 +2,6 @@ body {
     display: block;
     padding-left: 10%;
     padding-right: 10%;
-
-
     font-family: 'Montserrat Alternates', sans-serif;
 }
 
@@ -29,8 +27,11 @@ body {
     text-align: center;
     margin-left: 600px;
     margin-right: 600px;
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 
+/* Menu de navigation */
 #menu {
 
 }
@@ -42,9 +43,24 @@ nav ul {
 }
 
 nav li {
-    margin-right: 1rem; /*pourcentage de taille en fonction du zoom 1 rem = 10px pour zoom = 100%*/
+    font-size: 1.5em;
+    margin-right: 2rem; /*pourcentage de taille en fonction du zoom 1 rem = 10px pour zoom = 100%*/
 }
 
+/* Liens de navigation */
+a {
+    text-decoration: none;
+}
+
+a:visited {
+    color: blue;
+}
+
+a:hover {
+    color: red;
+}
+
+/* Footer */
 footer {
     position: relative;
     padding-top: 30px;
@@ -54,9 +70,20 @@ footer {
 
 /* Modification du profil */
 .profil {
-    background-color: aqua;
-    text-align: center;
+    border-radius: 20px;
+    background-color: yellowgreen;
     padding: 50px 0 50px 0;
+    width: 80%;
+    margin: auto;
+    text-align: center;
+}
+
+.profil label {
+    margin-right: 10px;
+}
+
+.profil input {
+    margin-right: 10px;
 }
 
 /* Messages flash */
@@ -83,10 +110,11 @@ footer {
 }
 
 #liste {
-    width: 90%;
-    height: 200px;
+    height: 400px;
     text-align: center;
     margin: auto;
+    display: flow;
+    overflow: auto;
 }
 
 table, tr, td, th {
@@ -107,19 +135,23 @@ tr:nth-child(even) {
     margin-top: 20px;
 }
 
+#filtre {
+    column-count: 2;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+label, input {
+    margin-top: 10px;
+}
+
 /*page detail sortie*/
-
-
 .sortie_gauche {
-
     display: inline-block;
     line-height: 160%;
     width: 30%;
-    margin-top: 20px;
-    margin-left: 20%;
-    margin-right: 20px;
-    margin-bottom: 20px;
-  }
+    margin: 20px 20px 20px 20%;
+}
 
 .sortie_droite {
     position: absolute;
@@ -130,6 +162,7 @@ tr:nth-child(even) {
     margin-left: 40px;
 
 }
+
 .tab_list{
     display: flow;
     height: 200px;
@@ -140,22 +173,15 @@ tr:nth-child(even) {
 .tab_list_tr{
     height: 30px;
     width: 220px;
-
 }
 
-
 /*page annuler sortie*/
-
 .annuler{
-
     margin-left: 40%;
     position: center;
-
-
 }
 
 /*page detail profil*/
 .affiche_profil{
     line-height: 170%;
-
 }

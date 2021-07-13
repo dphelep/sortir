@@ -1,16 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block titre %}
-
+    {{ parent() }} | Détails
 {% endblock %}
 
 {% block body %}
-    <div id="infos">
-        <h4>Date du jour : {{ "now"|date('d/m/Y') }}</h4>
-        {% if app.user%}
-            <h4>Participant : {{ app.user.prenom }} {{ app.user.nom|upper }}</h4>
-        {% endif %}
-    </div>
     <div>
         <h2>Détail de la sortie : {{ sortie.nom  }}</h2>
     </div>

@@ -4,28 +4,30 @@
 namespace App\Class;
 
 
+use DateTime;
+
 class Filtre
 {
-    private $campus;
+    private string $campus;
 
-    private $motCle;
+    private string $motCle;
 
-    private $dateDebutRecherche;
+    private DateTime $dateDebutRecherche;
 
-    private $dateFinRecherche;
+    private DateTime $dateFinRecherche;
 
-    private $sortieOrganisateur;
+    private bool $sortieOrganisateur = false;
 
-    private $sortieInscrit;
+    private bool $sortieInscrit = false;
 
-    private $sortieNonInscrit;
+    private bool $sortieNonInscrit = false;
 
-    private $sortiePassee;
+    private bool $sortiePassee = false;
 
     /**
      * @return string
      */
-    public function getCampus(): string
+    public function getCampus()
     {
         return $this->campus;
     }
@@ -55,33 +57,33 @@ class Filtre
     }
 
     /**
-     * @return string
+     * @return DateTime
      */
-    public function getDateDebutRecherche(): string
+    public function getDateDebutRecherche(): DateTime
     {
         return $this->dateDebutRecherche;
     }
 
     /**
-     * @param string $dateDebutRecherche
+     * @param DateTime $dateDebutRecherche
      */
-    public function setDateDebutRecherche(string $dateDebutRecherche): void
+    public function setDateDebutRecherche(DateTime $dateDebutRecherche): void
     {
         $this->dateDebutRecherche = $dateDebutRecherche;
     }
 
     /**
-     * @return string
+     * @return DateTime
      */
-    public function getDateFinRecherche(): string
+    public function getDateFinRecherche(): DateTime
     {
         return $this->dateFinRecherche;
     }
 
     /**
-     * @param string $dateFinRecherche
+     * @param DateTime $dateFinRecherche
      */
-    public function setDateFinRecherche(string $dateFinRecherche): void
+    public function setDateFinRecherche(DateTime $dateFinRecherche): void
     {
         $this->dateFinRecherche = $dateFinRecherche;
     }

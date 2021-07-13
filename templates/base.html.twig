@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>{% block title %}Sortir{% endblock %}</title>
+    <title>{% block titre %}Sortir{% endblock %}</title>
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
@@ -19,9 +19,15 @@
         {# en-tête à faire #}
         <h1><a href="{{ path('sortie_liste') }}"><img src="{{ asset('img/sortir.jpg') }}" alt="Sortir" id="logo"></a></h1>
         {% include 'menu/nav.html.twig' %}
+        <div id="infos">
+            <h4>Date du jour : {{ "now"|date('d/m/Y') }}</h4>
+            {% if app.user%}
+                <h4>Participant : {{ app.user.prenom }} {{ app.user.nom|upper }}</h4>
+            {% endif %}
+        </div>
     </header>
 
-    <main>
+    <div>
         {# Affichage des messages flash #}
         {% for label, messages in app.flashes %}
             {% for message in messages %}
@@ -30,8 +36,8 @@
                 </div>
             {% endfor %}
         {% endfor %}
+    </div>
 
-    </main>
     {% block body %}{% endblock %}
 
 </body>

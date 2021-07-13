@@ -34,6 +34,10 @@ class SortieController extends AbstractController
         $filtreForm = $this->createForm(FiltreType::class, $filtre);
         $filtreForm->handleRequest($request);
 
+        if ($filtreForm->isSubmitted() && $filtreForm->isValid()) {
+            $sorties = $sortieRepository->findSorties($filtre);
+        }
+
         return $this->render('sortie/liste.html.twig', [
             'sorties' => $sorties,
             'filtreForm' => $filtreForm->createView(),

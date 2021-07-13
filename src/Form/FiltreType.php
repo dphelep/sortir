@@ -9,6 +9,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -19,9 +20,9 @@ class FiltreType extends AbstractType
         $builder
             ->add('campus', EntityType::class, [
                 'class' => Campus::class,
-                'required' => false,
                 'label' => 'Campus : ',
-                'choice_label' => 'nom'
+                'choice_label' => 'nom',
+
             ])
             ->add('motCle', SearchType::class, [
                 'label' => 'Le nom de la sortie contient : ',
@@ -31,12 +32,12 @@ class FiltreType extends AbstractType
                 ]
             ])
             ->add('dateDebutRecherche', DateTimeType::class, [
-                'label' => 'Entre ',
+                'label' => 'Entre le ',
                 'required' => false,
                 'widget' => 'single_text',
             ])
             ->add('dateFinRecherche', DateTimeType::class, [
-                'label' => 'et ',
+                'label' => 'et le ',
                 'required' => false,
                 'widget' => 'single_text',
             ])
