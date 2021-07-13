@@ -8,21 +8,21 @@ use DateTime;
 
 class Filtre
 {
-    private string $campus;
+    private $campus;
 
-    private string $motCle;
+    private $motCle;
 
-    private DateTime $dateDebutRecherche;
+    private $dateDebutRecherche;
 
-    private DateTime $dateFinRecherche;
+    private $dateFinRecherche;
 
-    private bool $sortieOrganisateur = false;
+    private $sortieOrganisateur;
 
-    private bool $sortieInscrit = false;
+    private $sortieInscrit;
 
-    private bool $sortieNonInscrit = false;
+    private $sortieNonInscrit;
 
-    private bool $sortiePassee = false;
+    private $sortiePassee;
 
     /**
      * @return string
@@ -35,7 +35,7 @@ class Filtre
     /**
      * @param string $campus
      */
-    public function setCampus(string $campus): void
+    public function setCampus($campus): void
     {
         $this->campus = $campus;
     }
@@ -43,7 +43,7 @@ class Filtre
     /**
      * @return string
      */
-    public function getMotCle(): string
+    public function getMotCle(): ?string
     {
         return $this->motCle;
     }
@@ -51,7 +51,7 @@ class Filtre
     /**
      * @param string $motCle
      */
-    public function setMotCle(string $motCle): void
+    public function setMotCle(?string $motCle): void
     {
         $this->motCle = $motCle;
     }
@@ -59,7 +59,7 @@ class Filtre
     /**
      * @return DateTime
      */
-    public function getDateDebutRecherche(): DateTime
+    public function getDateDebutRecherche(): ?DateTime
     {
         return $this->dateDebutRecherche;
     }
@@ -67,7 +67,7 @@ class Filtre
     /**
      * @param DateTime $dateDebutRecherche
      */
-    public function setDateDebutRecherche(DateTime $dateDebutRecherche): void
+    public function setDateDebutRecherche(?DateTime $dateDebutRecherche): void
     {
         $this->dateDebutRecherche = $dateDebutRecherche;
     }
@@ -75,7 +75,7 @@ class Filtre
     /**
      * @return DateTime
      */
-    public function getDateFinRecherche(): DateTime
+    public function getDateFinRecherche(): ?DateTime
     {
         return $this->dateFinRecherche;
     }
@@ -83,7 +83,7 @@ class Filtre
     /**
      * @param DateTime $dateFinRecherche
      */
-    public function setDateFinRecherche(DateTime $dateFinRecherche): void
+    public function setDateFinRecherche(?DateTime $dateFinRecherche): void
     {
         $this->dateFinRecherche = $dateFinRecherche;
     }

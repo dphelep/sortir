@@ -7,6 +7,7 @@ use App\Class\Filtre;
 use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -17,13 +18,15 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class SortieRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private $security;
+
+    public function __construct(ManagerRegistry $registry, Security $security)
     {
         parent::__construct($registry, Sortie::class);
+        $this->security = $security;
     }
 
-    public function findSorties(Filtre $filtre,
-                                UserInterface $participant) {
+    public function findSorties(Filtre $filtre) {
 
         $dateDuJour = new DateTime('now');
 
@@ -54,19 +57,19 @@ class SortieRepository extends ServiceEntityRepository
         /* Recherche si organisateur */
         if ($filtre->isSortieOrganisateur()) {
             $query->andWhere('IDENTITY(s.organisateur) LIKE :organisateur')
-                ->setParameter('organisateur', $participant);
+                ->setParameter('organisateur', $this->security->getUser());
         }
 
         /* Recherche si inscrit */
         if ($filtre->isSortieInscrit()) {
             $query->innerJoin('s.participants', 'p', 'WITH', 'p.id = :userId')
-                ->setParameter('userId', $participant);
+                ->setParameter('userId', $this->security->getUser());
         }
 
         /* Recherche si non inscrit */
         if ($filtre->isSortieNonInscrit()) {
             $query->andWhere(':user NOT IN s.participants')
-                ->setParameter('user', $participant);
+                ->setParameter('user', $this->security->getUser());
         }
 
         /* Recherche si sortie passée */
