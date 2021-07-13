@@ -3,25 +3,70 @@
 {% block titre %} {{ parent()}} | Modifier une sortie {% endblock %}
 
 {% block body %}
-
+  <div class="titreModifier">
     <h2>Modifier une sortie</h2>
+  </div>
     {{ form_start(sortieForm) }}
 
-    Campus : {{ app.user.campus.nom }}
+        <div class="sortie_gauche">
+            <div>{{ form_row(sortieForm.nom) }}</div>
+            <div>{{ form_row(sortieForm.dateHeureDebut) }}</div>
+            <div>{{ form_row(sortieForm.dateLimiteInscription) }}</div>
+            <div>{{ form_row(sortieForm.nbInscriptionsMax) }}</div>
+            <div>{{ form_row(sortieForm.duree) }} minutes</div>
+            <div>{{ form_row(sortieForm.infosSortie) }}</div>
+        </div>
 
-    {{ form_widget(sortieForm) }}
+    <div class="sortie_droite">
+        <div>Campus : {{ app.user.campus.nom }}</div>
+        <div>{{ form_row(sortieForm.ville) }}</div>
+        <div>
+            {{ form_row(sortieForm.lieu) }}
+            <button id="btnAjoutLieu">+</button>
+        </div>
+        <div>
+            Rue :
+            {% if sortie.lieu %}
+                {{ sortie.lieu.rue }}
+            {% else %}
+            {% endif %}
+        </div>
+        <div>
+            Code postal :
+            {% if sortie.lieu %}
+                {{ sortie.lieu.ville.codePostal }}
+            {% else %}
+            {% endif %}
+        </div>
+        <div>
+            Latitude :
+            {% if sortie.lieu %}
+                {{ sortie.lieu.latitude }}
+            {% else %}
+            {% endif %}
+            <br>
+            Longitude :
+            {% if sortie.lieu %}
+                {{ sortie.lieu.longitude }}
+            {% else %}
+            {% endif %}
+        </div>
+    </div>
+    <br><br><br>
 
-    <div class="btn">
-        <button>Enregistrer</button>
-    </div>
-    <div class="btn">
-        <button>Publier la sortie</button>
-    </div>
-    <div class="btn">
-        <button>Supprimer la sortie</button>
-    </div>
-    <div class="btn">
-        <button>Annuler</button>
+    <div class="btnContainer">
+        <div class="btn">
+            {{ form_row(sortieForm.btnEnregistrer) }}
+        </div>
+        <div class="btn">
+            {{ form_row(sortieForm.btnPublier) }}
+        </div>
+        <div class="btn">
+            <button>Supprimer la sortie</button>
+        </div>
+        <div class="btn">
+            <button id="btnAnnuler">Annuler</button>
+        </div>
     </div>
 
     {{ form_end(sortieForm) }}

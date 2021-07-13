@@ -61,7 +61,13 @@ class SortieController extends AbstractController
 
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
 
-            $etat = $etatRepository->findOneBy(["libelle" => "Créée"]);
+            if($sortieForm->get('btnEnregistrer')->isClicked()) {
+                $etat = $etatRepository->findOneBy(["libelle" => "En création"]);
+            }
+
+            if($sortieForm->get('btnPublier')->isClicked()) {
+                $etat = $etatRepository->findOneBy(["libelle" => "Créée"]);
+            }
 
             $sortie->setEtat($etat);
             $sortie->setOrganisateur($this->getUser());
@@ -70,10 +76,9 @@ class SortieController extends AbstractController
             $entityManager->persist($sortie);
             $entityManager->flush();
 
-            $this->addFlash('success', 'La sortie a bien été ajoutée !');
+            $this->addFlash('success', 'La sortie a été ajoutée !');
             return $this->redirectToRoute('sortie_liste');
         }
-
         return $this->render('sortie/creer.html.twig', [
             'sortieForm' => $sortieForm->createView(),
             'sortie' => $sortie,
@@ -135,8 +140,11 @@ class SortieController extends AbstractController
     /**
      * @Route("/sortie/modifier/{id}", name="sortie_modifier")
      */
-    public function modifier(int $id, Request $request, EntityManagerInterface $entityManager, SortieRepository $sortieRepository)
-    {
+    public function modifier(int $id,
+                             Request $request,
+                             EntityManagerInterface $entityManager,
+                             SortieRepository $sortieRepository,
+                             EtatRepository $etatRepository) {
 
         $sortie = $sortieRepository->find($id);
         $sortieForm = $this->createForm(SortieType::class, $sortie);
@@ -149,16 +157,46 @@ class SortieController extends AbstractController
 
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
 
+            $etat = $etatRepository->findOneBy(["libelle" => "Créée"]);
+
+            $sortie->setEtat($etat);
+            $sortie->setOrganisateur($this->getUser());
+            $sortie->setSiteOrganisateur($this->getUser()->getCampus());
+
             $entityManager->persist($sortie);
             $entityManager->flush();
 
             $this->addFlash('success', 'La sortie a été modifiée !');
-            return $this->redirectToRoute('sortie_liste', ['id' => $sortie->getId()]);
+            return $this->redirectToRoute('sortie_detail', ['id' => $sortie->getId()]);
         }
         return $this->render('sortie/modifier.html.twig', [
-            'sortieForm' => $sortieForm->createView()
+            'sortieForm' => $sortieForm->createView(),
+            'sortie' => $sortie
         ]);
     }
+
+
+    /**
+     * @Route("/sortie/supprimer/{id}", name="sortie_supprimer")
+     */
+    public function supprimer($id,
+                              Request $request,
+                              EntityManagerInterface $entityManager,
+                              SortieRepository $sortieRepository): Response
+    {
+        $sortie = $sortieRepository->find($id);
+
+        if(!$sortie) {
+            throw $this->createNotFoundException("Oops ! Cette sortie n'existe pas !");
+        }
+
+        $entityManager->remove($sortie);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'La sortie a été supprimée !');
+        return $this->redirectToRoute('sortie_liste');
+    }
+
 
     /**
      * Inscription a une Sortie

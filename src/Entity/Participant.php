@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @UniqueEntity(fields={"pseudo", "mail"})
@@ -24,6 +25,8 @@ class Participant implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\NotBlank(message="Ce champ est obligatoire")
+     * @Assert\Email(message="L'adresse saisie ('{{ value }}' n'est pas une adresse mail valide")
      */
     private $mail;
 
@@ -35,21 +38,33 @@ class Participant implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(message="Ce champ est obligatoire")
      */
     private $motPasse;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank(message="Ce champ est obligatoire")
+     * @Assert\Length(
+     *     max=50,
+     *     maxMessage="Ce champ ne peut pas contenir plus de 50 caracères"
+     * )
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank(message="Ce champ est obligatoire")
+     * @Assert\Length(
+     *     max=50,
+     *     maxMessage="Ce champ ne peut pas contenir plus de 50 caracères"
+     * )
      */
     private $prenom;
 
     /**
      * @ORM\Column(type="string", length=20)
+     * @Assert\NotBlank(message="Ce champ est obligatoire")
      */
     private $telephone;
 
@@ -65,12 +80,18 @@ class Participant implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank(message="Ce champ est obligatoire")
+     * @Assert\Length(
+     *     max=50,
+     *     maxMessage="Ce champ ne peut pas contenir plus de 50 caracères"
+     * )
      */
     private $pseudo;
 
     /**
      * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="participant")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\Choice(choices={"Chartres-de-Bretagne", "Quimper", "Saint-Herblain", "Niort"})
      */
     private $campus;
 
