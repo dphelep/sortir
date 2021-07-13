@@ -20,37 +20,12 @@
         <div class="sortie_droite">
             <div>Campus : {{ app.user.campus.nom }}</div>
             <div>{{ form_row(sortieForm.ville) }}</div>
+            <div>{{ form_row(sortieForm.lieu) }}</div>
             <div>
-                {{ form_row(sortieForm.lieu) }}
-                <button id="btnAjoutLieu">+</button>
-            </div>
-            <div>
-            <div class="col">
-                {{ form_row(sortieForm.ville) }}
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col">
-                {{ form_row(sortieForm.dateLimiteInscription) }}
-            </div>
-            <div class="col">
-                <span>{{ form_row(sortieForm.lieu) }}</span>
-
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col">
-                {{ form_row(sortieForm.nbInscriptionsMax) }}
-            </div>
-            <div class="col">
                 Rue :
                 {% if sortie.lieu %}
                     {{ sortie.lieu.rue }}
                 {% else %}
-                {{ sortie.lieu.rue }}
-                    {% else %}
 
                 {% endif %}
             </div>
@@ -59,6 +34,7 @@
                 {% if sortie.lieu %}
                     {{ sortie.lieu.ville.codePostal }}
                 {% else %}
+
                 {% endif %}
             </div>
             <div>
@@ -75,7 +51,6 @@
                 {% endif %}
             </div>
         </div>
-        <br><br><br>
 
     <div class="btnContainer">
         <div class="btn">
@@ -85,12 +60,11 @@
             {{ form_row(sortieForm.btnPublier) }}
         </div>
         <div class="btn">
-            <a href="{{ path('sortie_annuler') }}"><button id="btnAnnuler">Annuler</button></a>
+            <button id="btnAnnuler">Annuler</button>
         </div>
     </div>
 
     {{ form_end(sortieForm) }}
         <span><a href="{{ path('lieu_creer') }}"><button id="btnAjoutLieu">+</button></a></span>
-    </div>
 {% endblock %}
 
