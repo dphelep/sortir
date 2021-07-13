@@ -284,6 +284,7 @@ class SortieController extends AbstractController
         $entityManager->flush();
 
         $this->addFlash('success', 'La sortie a été publiée !');
+        $this->addFlash('orange', 'Vous n\'etes plus inscrit a cette sortie !');
         return $this->redirectToRoute('sortie_liste');
     }
 

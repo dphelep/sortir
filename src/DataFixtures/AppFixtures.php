@@ -80,7 +80,7 @@ class AppFixtures extends Fixture
 
         }
         //Etat : 6 Etats
-        $etatlibelle = ['En création', 'Créée', 'Ouverte',
+        $etatlibelle = ['En création', 'Ouverte',
             'Activité en cours','Passée','Annulée','Historisée'];
         $etatlibelles = [];
         foreach ($etatlibelle as $libelle) {
@@ -113,6 +113,7 @@ class AppFixtures extends Fixture
         $manager->flush();
 
         //participant
+        $avatar="photodefaut.png";
         $rolesu=['ROLE_USER'];
         $instCampus = $this->atbCampusRepo->findAll();
         $participants = [];
@@ -127,6 +128,7 @@ class AppFixtures extends Fixture
                     $participant,'password'))
                 ->setRoles($rolesu)
                 ->setActif(true)
+                ->setPhoto($avatar)
                 ->setCampus($generator->randomElement($instCampus));
             $participants[] = $participant;
             $manager->persist($participant);
@@ -158,7 +160,7 @@ class AppFixtures extends Fixture
         //Sortie
 
 
-        $instEtat = $this->atbEtatRepo->findAll();
+        $etat = $this->atbEtatRepo->findAll();
         $instLieu = $this->atbLieuRepo->findAll();
         $instParticipants = $this->atbParticipantRepo->findAll();
         $sortieNom = ['Sortie Bowling', 'Sortie Ciné', 'Promenade en campagne', 'Allons au parc', 'Allons voir Mickey'];
@@ -175,7 +177,7 @@ class AppFixtures extends Fixture
                 ->setDuree($generator->numberBetween(60,380))
                 ->setNbInscriptionsMax($generator->numberBetween(10,30))
                 ->setSiteOrganisateur($generator->randomElement($instCampus))
-                ->setLieu($lieuSortie)
+                ->setEtat($generator->randomElement($etat))
                 ->addParticipant($generator->randomElement($participants))
                 ->addParticipant($generator->randomElement($participants))
                 ->addParticipant($generator->randomElement($participants))
@@ -202,11 +204,23 @@ class AppFixtures extends Fixture
                 $manager->persist($sortie);
             }
 
-            $sortie->setEtat($generator->randomElement($instEtat));
+           // $etatlibelle = ['En création', 'Ouverte',
+           //     'Activité en cours','Passée','Annulée','Historisée'];
 
-          //  for ($i = 0; $i <= 5; $i++) {
-           //     $sortie->addParticipant($generator->randomElement( $participants));
-//            }
+
+ //           $etat1 = $this->atbEtatRepo->find(1);
+ //        $datedujour=new \DateTime('now');
+ //        $dateHDeb = $sortie->getDateHeureDebut();
+ //         $dateLimite = $sortie->getDateLimiteInscription();
+ //        if ($dateHDeb < $datedujour){
+ //            $sortie->setEtat($etat1);
+ //        } else {
+ //            $sortie->setEtat($generator->randomElement($etat));
+
+  //       }
+  //          $manager->persist($sortie);
+
+
 
         }
 

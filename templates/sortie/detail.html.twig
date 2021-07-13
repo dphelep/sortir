@@ -28,6 +28,7 @@
 
 
     <div>
+        {% if sortie.participants.count %}
         <h3>Liste des participants inscrits :</h3>
 
 
@@ -53,6 +54,10 @@
 
             </tbody>
         </table>
+            {% else %}
+                <h3>Aucun participant inscrit...</h3>
+        {% endif %}
+
     </div>
 {% endblock %}
 
