@@ -208,17 +208,17 @@ class AppFixtures extends Fixture
            //     'Activité en cours','Passée','Annulée','Historisée'];
 
 
- //           $etat1 = $this->atbEtatRepo->find(1);
- //        $datedujour=new \DateTime('now');
- //        $dateHDeb = $sortie->getDateHeureDebut();
- //         $dateLimite = $sortie->getDateLimiteInscription();
- //        if ($dateHDeb < $datedujour){
- //            $sortie->setEtat($etat1);
- //        } else {
- //            $sortie->setEtat($generator->randomElement($etat));
+            $etat1 = $this->atbEtatRepo->find(1);
+            $etat2 = $this->atbEtatRepo->find(6);
+            $datedujour=new \DateTime('now');
+            $dateHDeb = $sortie->getDateHeureDebut();
+            $dateLimite = $sortie->getDateLimiteInscription();
+                if ($dateHDeb < $datedujour){
+                    $sortie->setEtat($etat1);
+                }
 
-  //       }
-  //          $manager->persist($sortie);
+
+          $manager->persist($sortie);
 
 
 
