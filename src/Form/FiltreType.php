@@ -7,9 +7,8 @@ use App\Entity\Campus;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -31,12 +30,12 @@ class FiltreType extends AbstractType
                     'placeholder' => 'Mot à rechercher'
                 ]
             ])
-            ->add('dateDebutRecherche', DateTimeType::class, [
+            ->add('dateDebutRecherche', DateType::class, [
                 'label' => 'Entre le ',
                 'required' => false,
                 'widget' => 'single_text',
             ])
-            ->add('dateFinRecherche', DateTimeType::class, [
+            ->add('dateFinRecherche', DateType::class, [
                 'label' => 'et le ',
                 'required' => false,
                 'widget' => 'single_text',

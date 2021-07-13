@@ -32,6 +32,7 @@ class SortieController extends AbstractController
         $sorties = $sortieRepository->findAll();
         $filtre = new Filtre();
         $filtreForm = $this->createForm(FiltreType::class, $filtre);
+
         $filtreForm->handleRequest($request);
 
         if ($filtreForm->isSubmitted() && $filtreForm->isValid()) {
