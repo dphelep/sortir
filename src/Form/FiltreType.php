@@ -21,6 +21,7 @@ class FiltreType extends AbstractType
                 'class' => Campus::class,
                 'label' => 'Campus : ',
                 'choice_label' => 'nom',
+                'required' => false,
             ])
             ->add('motCle', SearchType::class, [
                 'label' => 'Le nom de la sortie contient : ',

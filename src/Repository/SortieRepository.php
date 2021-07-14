@@ -8,7 +8,6 @@ use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Security;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @method Sortie|null find($id, $lockMode = null, $lockVersion = null)
@@ -26,6 +25,29 @@ class SortieRepository extends ServiceEntityRepository
         $this->security = $security;
     }
 
+    /**
+     * Fonction permettant l'affichage de toutes les sorties non historisées et triées
+     * et optimisation des requètes
+     */
+    public function findSortiesTrieesEtNonHistorisees() {
+
+        $query = $this->createQueryBuilder('s')
+            ->select('s','sO','e','p','o')
+            ->join('s.siteOrganisateur', 'sO')
+            ->join('s.etat', 'e')
+            ->join('s.participants', 'p')
+            ->join('s.organisateur', 'o')
+            ->where("s.etat != 6")
+            ->orderBy('s.dateHeureDebut', 'ASC');
+
+        return $query->getQuery()->getResult();
+    }
+
+    /**
+     * Fonction permettant de filtrer les sorties selon les filtres choisis par l'utilisateur
+     * @param Filtre $filtre
+     * @return int|mixed|string
+     */
     public function findSorties(Filtre $filtre) {
 
         $dateDuJour = new DateTime('now');

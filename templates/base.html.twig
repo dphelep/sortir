@@ -10,13 +10,12 @@
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
-    <link rel="icon" href="{{ asset('img/icon4.png') }}">
+    <link rel="icon" href="{{ asset('img/sortir.png') }}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@500&display=swap">
 </head>
 
 <body>
     <header>
-        {# en-tête à faire #}
         <h1><a href="{{ path('sortie_liste') }}"><img src="{{ asset('img/sortir.png') }}" alt="Sortir" id="logo"></a></h1>
         {% include 'menu/nav.html.twig' %}
         <div id="infos">

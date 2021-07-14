@@ -3,11 +3,9 @@
 namespace App\Controller;
 
 
-use App\Entity\Etat;
 use App\Entity\Participant;
 use App\Entity\Sortie;
 use App\Form\SortieType;
-use App\Repository\CampusRepository;
 use App\Repository\EtatRepository;
 use App\Repository\ParticipantRepository;
 use App\Form\AnnulerType;
@@ -30,7 +28,8 @@ class SortieController extends AbstractController
                           SortieRepository $sortieRepository): Response
     {
 
-        $sorties = $sortieRepository->findAll();
+        $sorties = $sortieRepository->findSortiesTrieesEtNonHistorisees();
+
         $filtre = new Filtre();
         $filtreForm = $this->createForm(FiltreType::class, $filtre);
 
