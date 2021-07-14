@@ -14,6 +14,7 @@ use App\Repository\LieuRepository;
 use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
 use App\Repository\VilleRepository;
+use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
@@ -192,8 +193,8 @@ class AppFixtures extends Fixture
 
 
 
-            $date1 = $generator->dateTimeBetween('-20days', '+40days');
-            $date2 = $generator->dateTimeBetween('-20days', '+40days');
+            $date1 = $generator->dateTimeBetween('-10days', '+40days');
+            $date2 = $generator->dateTimeBetween('-10days', '+40days');
 
             if ($date1 > $date2) {
                 $sortie->setDateHeureDebut($date1)
@@ -209,13 +210,29 @@ class AppFixtures extends Fixture
 
 
             $etat1 = $this->atbEtatRepo->find(1);
-            $etat2 = $this->atbEtatRepo->find(6);
+            $etat2 = $this->atbEtatRepo->find(2);
+            $etat3 = $this->atbEtatRepo->find(3);
+            $etat4 = $this->atbEtatRepo->find(4);
+            $etat5 = $this->atbEtatRepo->find(5);
+            $etat6 = $this->atbEtatRepo->find(6);
             $datedujour=new \DateTime('now');
             $dateHDeb = $sortie->getDateHeureDebut();
             $dateLimite = $sortie->getDateLimiteInscription();
                 if ($dateHDeb < $datedujour){
                     $sortie->setEtat($etat1);
+                }if  ($dateHDeb == $datedujour){
+                    $sortie->setEtat($etat3);
+
                 }
+
+
+
+
+
+
+
+
+
 
 
           $manager->persist($sortie);
