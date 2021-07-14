@@ -3,36 +3,36 @@
 {% block titre %} {{ parent()}} | Connexion {% endblock %}
 
 {% block body %}
-<div class="container">
     <form method="post">
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
 
-        <label for="inputEmail">Identifiant :</label>
-        <input type="email" name="email" id="inputEmail" class="form-control" required autofocus>
-        <br><br>
-        <label for="inputPassword">Mot de passe :</label>
-        <input type="password" name="password" id="inputPassword" class="form-control" required>
-        <br><br>
+        <div class="container">
+            <label for="inputEmail">Identifiant :</label>
+            <input type="email" name="email" id="inputEmail" class="form-control" required autofocus>
+            <br><br>
+            <label for="inputPassword">Mot de passe :</label>
+            <input type="password" name="password" id="inputPassword" class="form-control" required>
+            <br><br>
 
-        <input type="hidden" name="_csrf_token"
-               value="{{ csrf_token('authenticate') }}">
+            <input type="hidden" name="_csrf_token"
+                   value="{{ csrf_token('authenticate') }}">
 
-        {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
-        #}
+            {#
+            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+            See https://symfony.com/doc/current/security/remember_me.html
+            #}
 
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Se souvenir de moi
-            </label>
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" name="_remember_me"> Se souvenir de moi
+                </label>
+            </div>
+            <br>
+            <button class="bouton">Connexion</button>
         </div>
-        <br>
-
-        <button id="btnConnexion">Connexion</button>
     </form>
-</div>
+
 
 {% endblock %}

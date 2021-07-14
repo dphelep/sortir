@@ -1,8 +1,10 @@
+/* Général et logo */
 body {
     display: block;
-    padding-left: 10%;
-    padding-right: 10%;
+    padding-left: 5%;
+    padding-right: 5%;
     font-family: 'Montserrat Alternates', sans-serif;
+    background-color: whitesmoke;
 }
 
 #logo {
@@ -10,8 +12,28 @@ body {
     margin: auto;
 }
 
-#btnConnexion {
+/* Container des formulaires et boutons */
+.container {
+    text-align: center;
+    background-color: yellowgreen;
+    border-radius: 20px;
+    padding: 50px 0 50px 0;
+    width: 600px;
+    margin: auto;
+}
 
+.bouton {
+    width: 200px;
+    height: 50px;
+    border-radius: 20px;
+    background-color: darkblue;
+    color: yellowgreen;
+    border: 2px solid white;
+}
+
+.bouton:hover {
+    color: red;
+    background-color: blue;
 }
 
 .btn, .duree, .ajout {
@@ -22,21 +44,34 @@ body {
     text-align: center;
 }
 
-#btnAjoutlieu {
-    border-radius: 50%;
+#btnAjoutLieu {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    background-color: darkblue;
+    font-size: 2.5em;
+    color: yellowgreen;
+    border: 2px solid white;
+}
+
+#btnAjoutLieu:hover {
+    color: red;
+    background-color: blue;
 }
 
 #btnAnnuler {
     background-color: red;
 }
 
-.container, .titreCreer, .titreModifier {
+.titreCreer, .titreModifier {
     text-align: center;
 }
 
 /* Menu de navigation */
 #menu {
-
+    background-color: white;
+    padding: 5px 20px;
+    border-radius: 20px 20px;
 }
 
 nav ul {
@@ -65,6 +100,7 @@ a:hover {
 
 /* Footer */
 footer {
+    color: darkblue;
     position: relative;
     margin-left: 50%;
     padding-top: 30px;
@@ -73,21 +109,22 @@ footer {
 
 /* Modification du profil */
 .profil {
-    border-radius: 20px;
-    background-color: yellowgreen;
-    padding: 50px 0 50px 0;
-    width: 80%;
-    margin: auto;
     text-align: left;
 }
 
 .profil label {
-    margin-left: 30%;
+    margin-left: 20%;
     margin-right: 10px;
 }
 
 .profil input {
-    margin-right: 10px;
+    width: 250px;
+    height: 20px;
+}
+
+.profil select {
+    height: 30px;
+    width: 250px;
 }
 
 /* Messages flash */
@@ -115,9 +152,11 @@ footer {
 /* Page d'accueil */
 #infos {
     text-align: right;
+    color: darkblue;
 }
 
 #liste {
+    width: 100%;
     height: 400px;
     text-align: center;
     margin: auto;
@@ -140,20 +179,29 @@ tr:nth-child(even) {
 }
 
 #btnCreer {
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 #filtre {
     column-count: 2;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding: 20px 20px;
+    margin-bottom: 20px;
+    border: 1px solid black;
+    border-radius: 20px 20px;
 }
 
-label, input {
+label, input, select {
     margin-top: 10px;
 }
 
-/*page detail sortie*/
+/* Page detail sortie */
+.titre {
+    background-color: yellowgreen;
+    padding-left: 20px;
+    border-radius: 20px 20px;
+    width: 50%;
+}
+
 .sortie_gauche {
     display: inline-block;
     line-height: 160%;
@@ -170,25 +218,25 @@ label, input {
     margin-left: 40px;
 }
 
-.tab_list{
+.tab_list {
     display: flow;
     height: 200px;
     width: 440px;
     overflow: auto;
 }
 
-.tab_list_tr{
+.tab_list_tr {
     height: 30px;
     width: 220px;
 }
 
-/*page annuler sortie*/
-.annuler{
+/* Page annuler sortie */
+.annuler {
     margin-left: 40%;
     position: center;
 }
 
-/*page detail profil*/
-.affiche_profil{
-    line-height: 170%;
+/* Page detail profil */
+.affiche_profil {
+    margin-bottom: 30px;
 }

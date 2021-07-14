@@ -20,7 +20,6 @@ class LieuType extends AbstractType
                 'label' => 'Ville : ',
                 'class'=> Ville::class,
                 'choice_label' => 'nom',
-
             ])
             ->add('nom', TextType::class, [
                 'label' => 'Nom du lieu : '

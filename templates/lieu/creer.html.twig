@@ -5,15 +5,16 @@
 {% endblock %}
 
 {% block body %}
-    <div>
+    <div class="container">
         <h2>Nouveau Lieu</h2>
-        {{ form_start(lieuForm) }}
-        {{ form_widget(lieuForm) }}
-        <button type="submit">Enregistrer</button>
-        <a href="{{ path('sortie_creer') }}"><button type="button">Annuler</button></a>
+        <div class="profil">
+            {{ form_start(lieuForm) }}
+            {{ form_widget(lieuForm) }}
+        </div>
+        <br>
+        <button type="submit" class="bouton">Enregistrer</button>
+        <a href="{{ path('sortie_creer') }}"><button type="button" class="bouton">Annuler</button></a>
         {{ form_end(lieuForm) }}
-
-
     </div>
 
 {% endblock %}

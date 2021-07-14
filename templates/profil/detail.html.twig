@@ -5,23 +5,19 @@
 {% endblock %}
 
 {% block body %}
-    <div id="">
-        <h2>{{ participants.nom }}</h2>
+    <div class="container">
+        <h2>{{ participants.pseudo }}</h2>
+        <img src="">
+        <div class="affiche_profil">
+            <div>Prénom : {{ participants.prenom }}</div>
+            <div>Nom : {{ participants.nom}}</div>
+            <div>Télephone :  {{ participants.telephone  }}</div>
+            <div>Email : {{ participants.mail  }}</div>
+            <div>Campus : {{ participants.campus.nom }} </div>
+        </div>
+        <a href="{{ path('sortie_liste') }}"><button class="bouton">Retour</button></a>
     </div>
-    <img src="">
-    <div class="affiche_profil">
-        <div> Prénom : {{ participants.prenom }}</div>
-        <div> Nom : {{ participants.nom}}</div>
-        <div> Télephone :  {{ participants.telephone  }}</div>
-        <div> Email : {{ participants.mail  }}</div>
-        <div> Campus : {{ participants.campus.nom }} </div>
-
-    </div>
-    <a href="{{ path('sortie_liste') }}"><button id="btnCreer">Retour</button></a>
-
-
-
-
 {% endblock %}
+
 
 

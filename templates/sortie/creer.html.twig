@@ -6,52 +6,54 @@
     <div class="titreCreer">
         <h2>Créer une sortie</h2>
     </div>
+
     {{ form_start(sortieForm) }}
+    <div class="sortie_gauche">
+        <div>{{ form_row(sortieForm.nom) }}</div>
+        <div>{{ form_row(sortieForm.dateHeureDebut) }}</div>
+        <div>{{ form_row(sortieForm.dateLimiteInscription) }}</div>
+        <div>{{ form_row(sortieForm.nbInscriptionsMax) }}</div>
+        <div class="duree">{{ form_row(sortieForm.duree) }}</div><div class="duree">minutes</div>
+        <div>{{ form_row(sortieForm.infosSortie) }}</div>
+    </div>
 
-        <div class="sortie_gauche">
-            <div>{{ form_row(sortieForm.nom) }}</div>
-            <div>{{ form_row(sortieForm.dateHeureDebut) }}</div>
-            <div>{{ form_row(sortieForm.dateLimiteInscription) }}</div>
-            <div>{{ form_row(sortieForm.nbInscriptionsMax) }}</div>
-            <div class="duree">{{ form_row(sortieForm.duree) }}</div><div class="duree">minutes</div>
-            <div>{{ form_row(sortieForm.infosSortie) }}</div>
+    <div class="sortie_droite">
+        <div>Campus : {{ app.user.campus.nom }}</div>
+        <div>{{ form_row(sortieForm.ville) }}</div>
+        <div class="ajout">{{ form_row(sortieForm.lieu) }}</div>
+        <div class="ajout"><a href="{{ path('lieu_creer') }}"><button type="button" id="btnAjoutLieu" title="Créer un nouveau lieu">+</button></a></div>
+        <div>
+            Rue :
+            {% if sortie.lieu %}
+                {{ sortie.lieu.rue }}
+            {% else %}
+                Non renseignée...
+            {% endif %}
         </div>
-
-        <div class="sortie_droite">
-            <div>Campus : {{ app.user.campus.nom }}</div>
-            <div>{{ form_row(sortieForm.ville) }}</div>
-            <div class="ajout">{{ form_row(sortieForm.lieu) }}</div>
-            <div class="ajout"><a href="{{ path('lieu_creer') }}"><button type="button" id="btnAjoutLieu">+</button></a></div>
-            <div>
-                Rue :
-                {% if sortie.lieu %}
-                    {{ sortie.lieu.rue }}
-                {% else %}
-
-                {% endif %}
-            </div>
-            <div>
-                Code postal :
-                {% if sortie.lieu %}
-                    {{ sortie.lieu.ville.codePostal }}
-                {% else %}
-
-                {% endif %}
-            </div>
-            <div>
-                Latitude :
-                {% if sortie.lieu %}
-                    {{ sortie.lieu.latitude }}
-                {% else %}
-                {% endif %}
-                <br>
-                Longitude :
-                {% if sortie.lieu %}
-                    {{ sortie.lieu.longitude }}
-                {% else %}
-                {% endif %}
-            </div>
+        <div>
+            Code postal :
+            {% if sortie.lieu %}
+                {{ sortie.lieu.ville.codePostal }}
+            {% else %}
+                Non renseigné...
+            {% endif %}
         </div>
+        <div>
+            Latitude :
+            {% if sortie.lieu %}
+                {{ sortie.lieu.latitude }}
+            {% else %}
+                Non renseignée...
+            {% endif %}
+            <br>
+            Longitude :
+            {% if sortie.lieu %}
+                {{ sortie.lieu.longitude }}
+            {% else %}
+                Non renseignée...
+            {% endif %}
+        </div>
+    </div>
 
     <div class="btnContainer">
         <div class="btn">
@@ -64,7 +66,6 @@
             <a href="{{ path('sortie_liste') }}"><button type="button" id="btnAnnuler">Annuler</button></a>
         </div>
     </div>
-
     {{ form_end(sortieForm) }}
 
 {% endblock %}

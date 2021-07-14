@@ -21,7 +21,6 @@ class FiltreType extends AbstractType
                 'class' => Campus::class,
                 'label' => 'Campus : ',
                 'choice_label' => 'nom',
-
             ])
             ->add('motCle', SearchType::class, [
                 'label' => 'Le nom de la sortie contient : ',
@@ -41,19 +40,19 @@ class FiltreType extends AbstractType
                 'widget' => 'single_text',
             ])
             ->add('sortieOrganisateur', CheckboxType::class, [
-                'label' => 'Sorties dont je suis l\'organisateur/trice',
+                'label' => 'Sorties dont je suis l\'organisateur/trice ',
                 'required' => false,
             ])
             ->add('sortieInscrit', CheckboxType::class, [
-                'label' => 'Sorties auxquelles je suis inscrit/e',
+                'label' => 'Sorties auxquelles je suis inscrit/e ',
                 'required' => false,
             ])
             ->add('sortieNonInscrit', CheckboxType::class, [
-                'label' => 'Sorties auxquelles je ne suis pas inscrit/e',
+                'label' => 'Sorties auxquelles je ne suis pas inscrit/e ',
                 'required' => false,
             ])
             ->add('sortiePassee', CheckboxType::class, [
-                'label' => 'Sorties passées',
+                'label' => 'Sorties passées ',
                 'required' => false,
             ]);
     }

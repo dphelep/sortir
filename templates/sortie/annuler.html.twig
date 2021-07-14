@@ -5,24 +5,20 @@
 {% endblock %}
 
 {% block body %}
-    <section class="annuler">
-    <div >
+    <section class="container">
         <h2>Annuler une sortie</h2>
-    </div>
     <div>
         {{ form_start(annulerForm) }}
-        <div> Nom de la sortie : {{ sortie.nom }}</div>
-        <div> Date et heure de la sortie : {{ sortie.dateHeureDebut|date('d/m/Y H:i')}}</div>
-        <div> Campus: {{ sortie.siteOrganisateur.nom }} </div>
-        <div> Lieu : {{ sortie.lieu.rue }} {{ sortie.lieu.ville.codePostal }} {{ sortie.lieu.ville.nom }}</div>
-
+            <div> Nom de la sortie : {{ sortie.nom }}</div>
+            <div> Date et heure de la sortie : {{ sortie.dateHeureDebut|date('d/m/Y H:i')}}</div>
+            <div> Campus : {{ sortie.siteOrganisateur.nom }} </div>
+            <div> Lieu : {{ sortie.lieu.rue }} - {{ sortie.lieu.ville.codePostal }} {{ sortie.lieu.ville.nom }}</div>
         {{ form_widget(annulerForm) }}
-
-
     </div>
-        <a href="{{ path('sortie_liste') }}"><button id="btnCreer">Enregistrer</button></a>
+        <br>
+        <a href="{{ path('sortie_liste') }}"><button class="bouton" type="submit">Enregistrer</button></a>
         {{ form_end(annulerForm) }}
-        <a href="{{ path('sortie_liste') }}"><button id="btnCreer">Annuler</button></a>
+        <a href="{{ path('sortie_liste') }}"><button class="bouton">Annuler</button></a>
     </section>
     {{ form_end(annulerForm) }}
 
