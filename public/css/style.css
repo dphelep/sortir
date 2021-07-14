@@ -5,6 +5,8 @@ body {
     padding-right: 5%;
     font-family: 'Montserrat Alternates', sans-serif;
     background-color: whitesmoke;
+    /* background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.9)),
+    url("../img/fond.jpg"); */
 }
 
 #logo {
@@ -239,4 +241,15 @@ label, input, select {
 /* Page detail profil */
 .affiche_profil {
     margin-bottom: 30px;
+}
+
+/* Page d'erreur */
+.erreur {
+    background-color: yellowgreen;
+    text-align: center;
+    border-radius: 20px 20px;
+}
+
+#desole {
+    width: 100%;
 }
