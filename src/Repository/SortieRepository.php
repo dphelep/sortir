@@ -35,7 +35,7 @@ class SortieRepository extends ServiceEntityRepository
             ->select('s','sO','e','p','o')
             ->join('s.siteOrganisateur', 'sO')
             ->join('s.etat', 'e')
-            ->join('s.participants', 'p')
+            ->leftjoin('s.participants', 'p')
             ->join('s.organisateur', 'o')
             ->where("s.etat != 6")
             ->orderBy('s.dateHeureDebut', 'ASC');
