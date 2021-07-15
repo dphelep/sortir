@@ -3,21 +3,18 @@
 {% block titre %} {{ parent()}} | Créer une sortie {% endblock %}
 
 {% block body %}
-    <div class="titreCreer">
+    <div class="containerCreer">
         <h2>Créer une sortie</h2>
-    </div>
 
     {{ form_start(sortieForm) }}
-    <div class="sortie_gauche">
+    <div class="sortie_colonne">
         <div>{{ form_row(sortieForm.nom) }}</div>
         <div>{{ form_row(sortieForm.dateHeureDebut) }}</div>
         <div>{{ form_row(sortieForm.dateLimiteInscription) }}</div>
         <div>{{ form_row(sortieForm.nbInscriptionsMax) }}</div>
         <div class="duree">{{ form_row(sortieForm.duree) }}</div><div class="duree">minutes</div>
         <div>{{ form_row(sortieForm.infosSortie) }}</div>
-    </div>
 
-    <div class="sortie_droite">
         <div>Campus : {{ app.user.campus.nom }}</div>
         <div>{{ form_row(sortieForm.ville) }}</div>
         <div class="ajout">{{ form_row(sortieForm.lieu) }}</div>
@@ -54,19 +51,15 @@
             {% endif %}
         </div>
     </div>
+        <br>
 
-    <div class="btnContainer">
-        <div class="bouton">
+    <div class="btnContainerCreer">
             {{ form_row(sortieForm.btnEnregistrer) }}
-        </div>
-        <div class="bouton">
             {{ form_row(sortieForm.btnPublier) }}
-        </div>
-        <div>
             <a href="{{ path('sortie_liste') }}"><button class="bouton" type="button">Annuler</button></a>
-        </div>
     </div>
     {{ form_end(sortieForm) }}
+    </div>
 
 {% endblock %}
 

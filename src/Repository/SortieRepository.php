@@ -103,7 +103,7 @@ class SortieRepository extends ServiceEntityRepository
 
         /* Recherche si sortie passée */
         if ($filtre->isSortiePassee()) {
-            $query->andWhere('s.dateLimiteInscription < :dateDuJour')
+            $query->andWhere('s.dateHeureDebut < :dateDuJour')
                 ->setParameter('dateDuJour', $dateDuJour);
         }
 

@@ -5,19 +5,17 @@
 {% endblock %}
 
 {% block body %}
-    <div>
-        <h2 class="titre">Détail de la sortie : {{ sortie.nom  }}</h2>
-    </div>
-    <div class="sortie_gauche">
+    <div class="containerDetail">
+        <h2>Détail de la sortie : {{ sortie.nom  }}</h2>
+
+        <div class="sortie_colonne">
        <div> Nom de la sortie : {{ sortie.nom }}</div>
        <div> Date et heure de la sortie : {{ sortie.dateHeureDebut|date('d/m/Y H:i')}}</div>
        <div> Date limite d'inscription : {{ sortie.dateLimiteInscription|date('d/m/Y')  }}</div>
        <div> Nombre de places : {{ sortie.nbInscriptionsMax  }}</div>
        <div> Durée : {{ sortie.duree }} minutes</div>
        <div> Description et infos : {{ sortie.infosSortie }}</div>
-    </div>
 
-    <div class="sortie_droite">
         <div> Campus : {{ sortie.siteOrganisateur.nom }} </div>
         <div> Lieu :
             {% if sortie.lieu %}
@@ -60,6 +58,7 @@
             {% else %}
                 Non renseignée...
             {% endif %}
+        </div>
         </div>
     </div>
 

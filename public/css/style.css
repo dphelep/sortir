@@ -31,6 +31,7 @@ body {
     background-color: darkblue;
     color: yellowgreen;
     border: 2px solid white;
+    margin-right: 10px;
 }
 
 .bouton:hover {
@@ -42,10 +43,14 @@ body {
     display: inline-block;
 }
 
-.btnContainer {
-    display: inline-block;
-    text-align: center;
-    width: 100%;
+.btnContainerCreer {
+    display: flex;
+    margin-left: 20%;
+}
+
+.btnContainerModifier {
+    display: flex;
+    margin-left: 8%;
 }
 
 #btnAjoutLieu {
@@ -67,9 +72,25 @@ body {
     background-color: red;
 }*/
 
-.titreCreer, .titreModifier {
+/* Container des formulaires Créer et Modifier */
+.containerCreer, .containerModifier, .containerDetail {
     text-align: center;
+    background-color: yellowgreen;
+    border-radius: 20px;
+    padding: 50px 0 50px 0;
+    width: 1000px;
+    margin: auto;
 }
+
+.sortie_colonne {
+    column-count: 2;
+    text-align: left;
+    margin-left: 70px;
+}
+
+/*.titreCreer, .titreModifier {
+    text-align: center;
+}*/
 
 /* Menu de navigation */
 #menu {
@@ -214,12 +235,12 @@ label, input, select {
 }
 
 /* Page detail sortie */
-.titre {
+/*.titre {
     background-color: yellowgreen;
     padding-left: 20px;
     border-radius: 20px 20px;
     width: 50%;
-}
+}*/
 
 .sortie_gauche {
     display: inline-block;
