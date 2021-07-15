@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Participant;
 use App\Form\ProfilType;
 use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
@@ -12,7 +11,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class ProfilController extends AbstractController
 {
@@ -21,8 +19,8 @@ class ProfilController extends AbstractController
      */
     public function modifier(Request $request,
                              EntityManagerInterface $entityManager,
-                             UploadPicture $uploadPicture
-                             ): Response {
+                             UploadPicture $uploadPicture): Response
+    {
 
         $participant = $this->getUser();
         $profilForm = $this->createForm(ProfilType::class, $participant);
@@ -34,7 +32,6 @@ class ProfilController extends AbstractController
             $image = $profilForm->get('photo')->getData();
             $newFilename = $uploadPicture->save($participant->getNom(), $image, $this->getParameter('upload_photos-profil_dir'));
             $participant->setPhoto($newFilename);
-
 
             $entityManager->persist($participant);
             $entityManager->flush();

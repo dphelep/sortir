@@ -24,17 +24,13 @@ class LieuController extends AbstractController
      * @Route("/lieu/creer", name="lieu_creer")
      */
     public function creer(Request $request,
-                          EntityManagerInterface $entityManager,
-                            ): Response {
-
+                          EntityManagerInterface $entityManager): Response
+    {
         $lieu = new Lieu();
         $lieuForm = $this->createForm(LieuType::class, $lieu);
-
         $lieuForm->handleRequest($request);
 
         if($lieuForm->isSubmitted() && $lieuForm->isValid()) {
-
-
             $entityManager->persist($lieu);
             $entityManager->flush();
 
