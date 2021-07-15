@@ -121,6 +121,7 @@ footer {
     margin-right: 10px;
 }
 
+
 .profil input {
     width: 250px;
     height: 20px;
@@ -218,7 +219,7 @@ label, input, select {
 .sortie_gauche {
     display: inline-block;
     line-height: 160%;
-    width: 30%;
+    width: 40%;
     margin: 20px 20px 20px 20%;
 }
 
@@ -226,7 +227,7 @@ label, input, select {
     position: absolute;
     display: inline-block;
     line-height: 160%;
-    width: 30%;
+    width: 40%;
     margin-top: 20px;
     margin-left: 40px;
 }
@@ -264,3 +265,4 @@ label, input, select {
 #desole {
     width: 100%;
 }
+

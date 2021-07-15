@@ -180,6 +180,7 @@ class AppFixtures extends Fixture
                 ->setDuree($generator->numberBetween(60,380))
                 ->setNbInscriptionsMax($generator->numberBetween(10,30))
                 ->setSiteOrganisateur($generator->randomElement($instCampus))
+                ->setLieu($lieuSortie)
                 ->setEtat($generator->randomElement($etat))
                 ->addParticipant($generator->randomElement($participants))
                 ->addParticipant($generator->randomElement($participants))
