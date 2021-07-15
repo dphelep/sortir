@@ -73,7 +73,7 @@
                         {%
                             if app.user not in sortie.participants
                             and sortie.etat.libelle == 'Ouverte'
-                            and sortie.participants.count <= sortie.nbInscriptionsMax
+                            and sortie.participants.count < sortie.nbInscriptionsMax
                             and sortie.dateLimiteInscription > date('now')
                         %}
                             <a href="{{ path('sortie_inscription', {'id' : sortie.id }) }}">S'inscrire</a>

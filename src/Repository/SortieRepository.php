@@ -54,8 +54,15 @@ class SortieRepository extends ServiceEntityRepository
 
         /* Recherche par mot-clé */
         $query = $this->createQueryBuilder('s')
-            ->where('s.nom LIKE :motCle')
-            ->setParameter('motCle', "%{$filtre->getMotCle()}%");
+            ->select('s','sO','e','p','o')
+            ->join('s.siteOrganisateur', 'sO')
+            ->join('s.etat', 'e')
+            ->join('s.participants', 'p')
+            ->join('s.organisateur', 'o')
+            ->where("s.etat != 6")
+            ->andWhere('s.nom LIKE :motCle')
+            ->setParameter('motCle', "%{$filtre->getMotCle()}%")
+            ->orderBy('s.dateHeureDebut', 'ASC');
 
         /* Recherche selon campus */
         if (!is_null($filtre->getCampus())) {

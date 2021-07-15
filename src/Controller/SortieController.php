@@ -240,7 +240,7 @@ class SortieController extends AbstractController
      */
     public function desinscription(int $id,
                                    EntityManagerInterface $entityManager,
-                                   SortieRepository $sortieRepository,
+                                   SortieRepository $sortieRepository
                                     ): Response
     {
 
