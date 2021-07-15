@@ -38,12 +38,14 @@ body {
     background-color: blue;
 }
 
-.btn, .duree, .ajout {
+.bouton, .duree, .ajout {
     display: inline-block;
 }
 
 .btnContainer {
+    display: inline-block;
     text-align: center;
+    width: 100%;
 }
 
 #btnAjoutLieu {
@@ -61,9 +63,9 @@ body {
     background-color: blue;
 }
 
-#btnAnnuler {
+/*#btnAnnuler {
     background-color: red;
-}
+}*/
 
 .titreCreer, .titreModifier {
     text-align: center;
@@ -127,6 +129,15 @@ footer {
 .profil select {
     height: 30px;
     width: 250px;
+}
+
+.photo-profil {
+    height: 140px;
+    width: 140px;
+}
+
+.photo {
+    text-align: center;
 }
 
 /* Messages flash */

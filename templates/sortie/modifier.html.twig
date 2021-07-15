@@ -53,16 +53,16 @@
     <br><br><br>
 
     <div class="btnContainer">
-        <div class="btn">
+        <div class="bouton">
             {{ form_row(sortieForm.btnEnregistrer) }}
         </div>
-        <div class="btn">
+        <div class="bouton">
             {{ form_row(sortieForm.btnPublier) }}
         </div>
-        <div class="btn">
+        <div class="bouton">
             <a href="{{ path('sortie_supprimer', {'id' : sortie.id }) }}"><button type="button">Supprimer la sortie</button></a>
         </div>
-        <div class="btn">
+        <div class="bouton">
             <a href="{{ path('sortie_liste') }}"><button type="button" id="btnAnnuler">Annuler</button></a>
         </div>
     </div>

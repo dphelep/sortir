@@ -6,6 +6,7 @@ use App\Entity\Participant;
 use App\Form\ProfilType;
 use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
+use App\Services\UploadPicture;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,6 +21,7 @@ class ProfilController extends AbstractController
      */
     public function modifier(Request $request,
                              EntityManagerInterface $entityManager,
+                             UploadPicture $uploadPicture
                              ): Response {
 
         $participant = $this->getUser();
@@ -28,6 +30,11 @@ class ProfilController extends AbstractController
         $profilForm->handleRequest($request);
 
         if($profilForm->isSubmitted() && $profilForm->isValid()) {
+
+            $image = $profilForm->get('photo')->getData();
+            $newFilename = $uploadPicture->save($participant->getNom(), $image, $this->getParameter('upload_photos-profil_dir'));
+            $participant->setPhoto($newFilename);
+
 
             $entityManager->persist($participant);
             $entityManager->flush();

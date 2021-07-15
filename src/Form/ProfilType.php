@@ -7,11 +7,13 @@ use App\Entity\Participant;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Image;
 
 class ProfilType extends AbstractType
 {
@@ -37,7 +39,7 @@ class ProfilType extends AbstractType
                 'mapped' => false,
                 'type' => PasswordType::class,
                 'invalid_message' => 'Les deux mots de passe doivent correspondre.',
-                'first_options' => ['label' => 'Mot de passe :'],
+                'first_options' => ['label' => 'Mot de passe : '],
                 'second_options' => ['label' => 'Confirmation : '],
                 'required' => false,
             ])
@@ -45,6 +47,17 @@ class ProfilType extends AbstractType
                 'class' => Campus::class,
                 'choice_label' => 'nom',
                 'label' => 'Campus : '
+            ])
+            ->add('photo', FileType::class, [
+                'label' => 'Ma photo : ',
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new Image([
+                        'maxSize' => '7000k',
+                        'mimeTypesMessage' => " Ce format n'est pas autorisé !"
+                    ])
+                ]
             ]);
     }
 

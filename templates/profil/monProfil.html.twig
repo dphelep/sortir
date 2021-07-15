@@ -5,6 +5,15 @@
 {% endblock %}
 
 {% block body %}
+
+    <div class="photo">
+        {% if app.user.photo %}
+            <img class="photo-profil" src="{{ asset('img/photos-profil/' ~ app.user.photo ) }}" alt="photo-profil">
+        {% else %}
+            <img class="photo-profil" src="{{ asset('img/photos-profil/photodefaut.png') }}" alt="photo-defaut">
+        {% endif %}
+    </div>
+
     <div class="container">
         <h2>Mon Profil</h2>
         <div class="profil">

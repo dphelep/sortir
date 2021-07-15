@@ -5,13 +5,22 @@
 {% endblock %}
 
 {% block body %}
+
+    <div class="photo">
+        {% if participants.photo %}
+            <img class="photo-profil" src="{{ asset('img/photos-profil/' ~ participants.photo ) }}" alt="photo-profil">
+        {% else %}
+            <img class="photo-profil" src="{{ asset('img/photos-profil/photodefaut.png') }}" alt="photo-defaut">
+        {% endif %}
+    </div>
+
     <div class="container">
         <h2>{{ participants.pseudo }}</h2>
         <img src="">
         <div class="affiche_profil">
             <div>Prénom : {{ participants.prenom }}</div>
             <div>Nom : {{ participants.nom}}</div>
-            <div>Télephone :  {{ participants.telephone  }}</div>
+            <div>Téléphone :  {{ participants.telephone  }}</div>
             <div>Email : {{ participants.mail  }}</div>
             <div>Campus : {{ participants.campus.nom }} </div>
         </div>

@@ -241,7 +241,6 @@ class SortieController extends AbstractController
     public function desinscription(int $id,
                                    EntityManagerInterface $entityManager,
                                    SortieRepository $sortieRepository,
-                                    Participant $participant,
                                     ): Response
     {
 
@@ -251,9 +250,9 @@ class SortieController extends AbstractController
         if (!$sortie) {
             throw $this->createNotFoundException("Oops ! La sortie n'existe pas !");
         }
-        if (!$participant) {
+        /*if (!$participant) {
             throw $this->createNotFoundException("Oops ! Le participant n'existe pas !");
-        }
+        }*/
 
 
         $entityManager->persist($sortie);
@@ -283,7 +282,7 @@ class SortieController extends AbstractController
         $entityManager->flush();
 
         $this->addFlash('success', 'La sortie a été publiée !');
-        $this->addFlash('orange', 'Vous n\'etes plus inscrit a cette sortie !');
+        $this->addFlash('orange', 'Vous n\'êtes plus inscrit à cette sortie !');
         return $this->redirectToRoute('sortie_liste');
     }
 

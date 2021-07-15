@@ -58,7 +58,7 @@ class SortieType extends AbstractType
                 'choice_label' => 'nom',
             ])
             ->add('btnEnregistrer', SubmitType::class, [
-                'label' => 'Enregistrer'
+                'label' => 'Enregistrer',
             ])
             ->add('btnPublier', SubmitType::class, [
                 'label' => 'Publier la sortie'
