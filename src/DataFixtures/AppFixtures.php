@@ -138,12 +138,14 @@ class AppFixtures extends Fixture
         $mail = ['davidp@eni.fr','davidh@eni.fr','laurad@eni.fr'];
         $pseudos = ['davidp', 'davidh', 'laurad'];
         $passwords = ['mdp','mdp','mdp'];
+        $firstName = ['David','David','Laura'];
+        $lastName = ['Phelep','Huard','Dufaut'];
 
         for ($i = 0; $i < count($pseudos); $i++) {
             $participant = new Participant();
             $participant->setPseudo($pseudos[$i])
-                ->setNom($generator->lastName)
-                ->setPrenom($generator->firstName)
+                ->setNom($lastName[$i])
+                ->setPrenom($firstName[$i])
                 ->setTelephone($generator->phoneNumber)
                 ->setMail($mail[$i])
                 ->setPassword($this->passwordEncoder->encodePassword(
@@ -205,44 +207,25 @@ class AppFixtures extends Fixture
                 $manager->persist($sortie);
             }
 
-           // $etatlibelle = ['En création', 'Ouverte',
-           //     'Activité en cours','Passée','Annulée','Historisée'];
 
-
-            $etat1 = $this->atbEtatRepo->find(1);
-            $etat2 = $this->atbEtatRepo->find(2);
-            $etat3 = $this->atbEtatRepo->find(3);
-            $etat4 = $this->atbEtatRepo->find(4);
-            $etat5 = $this->atbEtatRepo->find(5);
-            $etat6 = $this->atbEtatRepo->find(6);
-            $datedujour=new \DateTime('now');
-            $dateHDeb = $sortie->getDateHeureDebut();
-            $dateLimite = $sortie->getDateLimiteInscription();
-                if ($dateHDeb < $datedujour){
-                    $sortie->setEtat($etat1);
-                }if  ($dateHDeb == $datedujour){
-                    $sortie->setEtat($etat3);
-
-                }
-
-
-
-
-
-
-
-
-
-
-
+//            $etat1 = $this->atbEtatRepo->find(1);
+//            $etat2 = $this->atbEtatRepo->find(2);
+//            $etat3 = $this->atbEtatRepo->find(3);
+//            $etat4 = $this->atbEtatRepo->find(4);
+//            $etat5 = $this->atbEtatRepo->find(5);
+//            $etat6 = $this->atbEtatRepo->find(6);
+//            $datedujour=new \DateTime('now');
+//            $dateHDeb = $sortie->getDateHeureDebut();
+//            $dateLimite = $sortie->getDateLimiteInscription();
+//                if ($dateHDeb < $datedujour){
+//                    $sortie->setEtat($etat1);
+//                }if  ($dateHDeb == $datedujour){
+//                    $sortie->setEtat($etat3);
+//                }
           $manager->persist($sortie);
-
-
-
         }
 
         $manager->flush();
     }
-
 
 }
