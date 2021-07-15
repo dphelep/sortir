@@ -170,12 +170,14 @@ footer {
 }
 
 #liste {
-    width: 100%;
+    width:auto;
     height: 400px;
     text-align: center;
-    margin: auto;
-    display: flow;
-    overflow: auto;
+    display: inline-block;
+    overflow-y: auto;
+}
+#table{
+    text-align: center;
 }
 
 table, tr, td, th {
@@ -186,6 +188,8 @@ table, tr, td, th {
 
 thead {
     background-color: silver;
+    position: sticky;
+    top: 0;
 }
 
 tr:nth-child(even) {
@@ -266,4 +270,3 @@ label, input, select {
 #desole {
     width: 100%;
 }
-

@@ -24,7 +24,7 @@
         <button type="submit" class="bouton">Rechercher</button>
     </div>
     {{ form_end(filtreForm) }}
-
+<div id="table">
     <table id="liste">
         <thead>
             <tr>
@@ -86,5 +86,8 @@
             {% endfor %}
         </tbody>
     </table>
+</div>
+    <div>
     <a href="{{ path('sortie_creer') }}"><button class="bouton" id="btnCreer">Créer une sortie</button></a>
+    </div>
 {% endblock %}

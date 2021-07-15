@@ -15,6 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -26,10 +27,11 @@ class SortieType extends AbstractType
             ->add('nom', TextType::class, [
                 'label' => 'Nom de la sortie : '
             ])
-            ->add('dateHeureDebut', DateTimeType::class, [
+            ->add('dateHeureDebut', DateTimeType::class , [
                 'label' => 'Date et heure de la sortie : ',
                 'html5' => true,
-                'widget' => 'single_text'
+                'date_widget' => 'single_text',
+                'time_widget' => 'single_text'
             ])
             ->add('dateLimiteInscription', DateType::class, [
                 'label' => 'Date limite d\'inscription : ',

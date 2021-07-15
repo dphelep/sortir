@@ -131,7 +131,7 @@ class SortieController extends AbstractController
             $entityManager->persist($sortie);
             $entityManager->flush();
 
-            $this->addFlash('success', 'La sortie a été annulée !');
+            $this->addFlash('orange', 'La sortie a été annulée !');
 
             return $this->redirectToRoute('sortie_liste', ['id' => $sortie->getId()]);
         }
@@ -202,7 +202,7 @@ class SortieController extends AbstractController
         $entityManager->remove($sortie);
         $entityManager->flush();
 
-        $this->addFlash('success', 'La sortie a été supprimée !');
+        $this->addFlash('orange', 'La sortie a été supprimée !');
         return $this->redirectToRoute('sortie_liste');
     }
 
@@ -258,7 +258,7 @@ class SortieController extends AbstractController
         $entityManager->persist($sortie);
         $entityManager->flush();
 
-        $this->addFlash('success', 'Vous n\'êtes plus inscrit à cette sortie !');
+        $this->addFlash('orange', 'Vous n\'êtes plus inscrit à cette sortie !');
         return $this->redirectToRoute('sortie_liste');
     }
 
@@ -282,7 +282,6 @@ class SortieController extends AbstractController
         $entityManager->flush();
 
         $this->addFlash('success', 'La sortie a été publiée !');
-        $this->addFlash('orange', 'Vous n\'êtes plus inscrit à cette sortie !');
         return $this->redirectToRoute('sortie_liste');
     }
 
